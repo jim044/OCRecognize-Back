@@ -6,8 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="OCRecognize-Back-Authentication" />
         <module name="OCRecognize-Back-Config" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="14" />
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="OCRecognize-Back-Authentication" options="-parameters" />
+      <module name="OCRecognize-Back-Config" options="-parameters" />
+    </option>
   </component>
 </project>

@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="OCRecognize-Back-Authentication" />
+        <module name="OCRecognize-Back-Gateway" />
         <module name="OCRecognize-Back-Config" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="OCRecognize-Back-Authentication" options="-parameters" />
       <module name="OCRecognize-Back-Config" options="-parameters" />
+      <module name="OCRecognize-Back-Gateway" options="-parameters" />
     </option>
   </component>
 </project>

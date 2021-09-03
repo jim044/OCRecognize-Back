@@ -11,6 +11,7 @@
     <modules>
         <module>OCRecognize-Back-Config</module>
         <module>OCRecognize-Back-Authentication</module>
+        <module>OCRecognize-Back-Gateway</module>
     </modules>
 
     <properties>

@@ -1,0 +1,80 @@
+databaseChangeLog:
+  - changeSet:
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) from pg_catalog.pg_namespace where nspname = 'authentication'
+      id: create-schema Authentication
+      author: james
+      changes:
+        - sql:
+            comment: Ajout des droits de la BDD
+            endDelimiter: ;
+            sql: GRANT ALL PRIVILEGES ON DATABASE ocrecognize TO james
+        - sql:
+            comment: Creation du schema
+            sql: CREATE SCHEMA authentication
+        - sql:
+            comment: Grant config du schema
+            sql: GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA authentication TO james
+  - changeSet:
+      id: create-table-user
+      author: james
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: user
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: user_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: username
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: password
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: firstname
+                  type: VARCHAR(250)
+              - column:
+                  name: lastname
+                  type: VARCHAR(250)
+            tableName: user
+            schemaName: authentication
+  - changeSet:
+      id: insert user
+      author: james
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: username
+                  value: jimmy.villossel@gmail.com
+              - column:
+                  name: password
+                  value: Obiwan2715
+              - column:
+                  name: firstname
+                  value: Jimmy
+              - column:
+                  name: lastname
+                  value: Villossel
+            dbms: '!h2,  mysql, postgresql'
+            schemaName: authentication
+            tableName: user

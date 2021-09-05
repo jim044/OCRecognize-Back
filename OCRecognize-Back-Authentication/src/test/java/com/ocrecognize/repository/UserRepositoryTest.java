@@ -26,8 +26,8 @@ public class UserRepositoryTest {
 
     @Test
     public void testFindByUsername(){
-        UserEntity userEntity = userRepository.findByUsername("James");
+        UserEntity userEntity = userRepository.findByUsername("Jimmy");
         assertNotNull(userEntity);
-        assertEquals("James", userEntity.getUsername());
+        assertEquals("Jimmy", userEntity.getUsername());
     }
 }

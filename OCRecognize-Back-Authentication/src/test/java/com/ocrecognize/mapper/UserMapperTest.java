@@ -55,7 +55,7 @@ public class UserMapperTest {
         roleDto.setRoleName("role_name");
 
         userEntity.setId(10L);
-        userEntity.setFirstname("James");
+        userEntity.setFirstname("Jimmy");
         userEntity.setUsername("jimmy.villossel@gmail.com");
         userEntity.setLastname("Villossel");
         userEntity.setPassword("Test");
@@ -63,7 +63,7 @@ public class UserMapperTest {
         listUserEntity.add(userEntity);
 
         userDto.setId(10L);
-        userDto.setFirstname("James");
+        userDto.setFirstname("Jimmy");
         userDto.setUsername("jimmy.villossel@gmail.com");
         userDto.setLastname("Villossel");
         userDto.setPassword("Test");

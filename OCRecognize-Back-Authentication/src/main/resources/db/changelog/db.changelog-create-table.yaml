@@ -6,7 +6,7 @@ databaseChangeLog:
             expectedResult: 0
             sql: SELECT COUNT(*) from pg_catalog.pg_namespace where nspname = 'authentication'
       id: create-schema Authentication
-      author: james
+      author: Jimmy
       changes:
         - sql:
             comment: Ajout des droits de la BDD
@@ -20,12 +20,13 @@ databaseChangeLog:
             sql: GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA authentication TO james
   - changeSet:
       id: create-table-user
-      author: james
+      author: Jimmy
       preConditions:
         - onFail: MARK_RAN
           not:
             tableExists:
               tableName: user
+              schemaName: authentication
       changes:
         - createTable:
             columns:
@@ -62,12 +63,13 @@ databaseChangeLog:
             schemaName: authentication
   - changeSet:
       id: create-table-role
-      author: james
+      author: Jimmy
       preConditions:
         - onFail: MARK_RAN
           not:
             tableExists:
               tableName: role
+              schemaName: authentication
       changes:
         - createTable:
             columns:
@@ -87,52 +89,30 @@ databaseChangeLog:
             tableName: role
             schemaName: authentication
   - changeSet:
-      id: insert role
-      author: james
+      id: addForeignKeyConstraint-role_id
+      author: Jimmy
       changes:
-        - insert:
-            columns:
-              - column:
-                  name: role_name
-                  value: administrateur
-            dbms: '!h2,  mysql, postgresql'
-            schemaName: authentication
-            tableName: role
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: user
+            baseTableSchemaName: authentication
+            constraintName: fk_role_user
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: role
+            referencedTableSchemaName: authentication
+            validate: true
   - changeSet:
-      id: insert user
-      author: james
+      id: insert user and role
+      author: Jimmy
       changes:
-        - insert:
-            columns:
-              - column:
-                  name: username
-                  value: jimmy.villossel@gmail.com
-              - column:
-                  name: password
-                  value: Obiwan2715
-              - column:
-                  name: firstname
-                  value: Jimmy
-              - column:
-                  name: lastname
-                  value: SELECT id from role WHERE role_name = 'administrateur'
-            dbms: '!h2,  mysql, postgresql'
-            schemaName: authentication
-            tableName: user
-  - changeSet:
-      id:  addForeignKeyConstraint-role_id
-      author: james
-      changes:
-        -  addForeignKeyConstraint:
-             baseColumnNames: role_id
-             baseTableName: user
-             baseTableSchemaName: authentication
-             constraintName: fk_role_user
-             deferrable: true
-             initiallyDeferred: true
-             onDelete: CASCADE
-             onUpdate: RESTRICT
-             referencedColumnNames: id
-             referencedTableName: role
-             referencedTableSchemaName: authentication
-             validate: true
+        sqlFile:
+          dbms: 'postgresql'
+          endDelimiter: \nGO
+          splitStatements: true
+          path: ./init_insert_user_role.sql
+          stripComments: true
+          relativeToChangelogFile: true

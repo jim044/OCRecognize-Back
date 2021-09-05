@@ -1,31 +1,30 @@
 package com.ocrecognize.mapper;
 
 import com.ocrecognize.dto.UserDto;
-import com.ocrecognize.entity.User;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.IterableMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Named;
+import com.ocrecognize.entity.UserEntity;
+import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.List;
 
 @Component
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",  uses = {RoleMapper.class})
 public interface UserMapper {
 
     @Named("UserEntityToDto")
-    UserDto entityToDto(User user);
+    @Mapping( source = "userEntity.roleEntity", target = "roleDto", qualifiedByName="RoleEntityToDto")
+    UserDto entityToDto(UserEntity userEntity);
 
     @Named("UserDtoToEntity")
-    User dtoToEntity(UserDto userDto);
+    @Mapping( source = "userDto.roleDto", target = "roleEntity", qualifiedByName="RoleDtoToEntity")
+    UserEntity dtoToEntity(UserDto userDto);
 
     @BeanMapping(resultType = HashSet.class)
     @IterableMapping(qualifiedByName = "UserEntityToDto")
-    List<UserDto> listEntityToDto(List<User> listUser);
+    List<UserDto> listEntityToDto(List<UserEntity> listUserEntity);
 
     @BeanMapping(resultType = HashSet.class)
     @IterableMapping(qualifiedByName = "UserDtoToEntity")
-    List<User> listDtoToEntity(List<UserDto> listUserDto);
+    List<UserEntity> listDtoToEntity(List<UserDto> listUserDto);
 }

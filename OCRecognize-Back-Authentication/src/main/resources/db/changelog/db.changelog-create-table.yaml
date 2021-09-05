@@ -55,8 +55,49 @@ databaseChangeLog:
               - column:
                   name: lastname
                   type: VARCHAR(250)
+              - column:
+                  name: role_id
+                  type: BIGINT
             tableName: user
             schemaName: authentication
+  - changeSet:
+      id: create-table-role
+      author: james
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: role
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: role_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: role_name
+                  type: VARCHAR(250)
+            tableName: role
+            schemaName: authentication
+  - changeSet:
+      id: insert role
+      author: james
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: role_name
+                  value: administrateur
+            dbms: '!h2,  mysql, postgresql'
+            schemaName: authentication
+            tableName: role
   - changeSet:
       id: insert user
       author: james
@@ -74,7 +115,24 @@ databaseChangeLog:
                   value: Jimmy
               - column:
                   name: lastname
-                  value: Villossel
+                  value: SELECT id from role WHERE role_name = 'administrateur'
             dbms: '!h2,  mysql, postgresql'
             schemaName: authentication
             tableName: user
+  - changeSet:
+      id:  addForeignKeyConstraint-role_id
+      author: james
+      changes:
+        -  addForeignKeyConstraint:
+             baseColumnNames: role_id
+             baseTableName: user
+             baseTableSchemaName: authentication
+             constraintName: fk_role_user
+             deferrable: true
+             initiallyDeferred: true
+             onDelete: CASCADE
+             onUpdate: RESTRICT
+             referencedColumnNames: id
+             referencedTableName: role
+             referencedTableSchemaName: authentication
+             validate: true

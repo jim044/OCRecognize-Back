@@ -1,13 +1,17 @@
 package com.ocrecognize.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "USER")
 @Data
-public class User {
+public class UserEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,5 +29,10 @@ public class User {
 
     @Column(name="lastname")
     private String lastname;
+
+    @OneToOne
+    @JoinColumn(name="role_id")
+    @JsonBackReference
+    private RoleEntity roleEntity;
 
 }

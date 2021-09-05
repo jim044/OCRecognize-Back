@@ -1,7 +1,5 @@
 package com.ocrecognize.controller;
 
-import com.ocrecognize.dto.UserDto;
-import com.ocrecognize.entity.User;
 import com.ocrecognize.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

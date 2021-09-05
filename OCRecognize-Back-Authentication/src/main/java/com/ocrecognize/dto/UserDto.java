@@ -1,5 +1,6 @@
 package com.ocrecognize.dto;
 
+import com.ocrecognize.entity.RoleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,6 @@ public class UserDto {
     private String firstname;
 
     private String lastname;
+
+    private RoleDto roleDto;
 }

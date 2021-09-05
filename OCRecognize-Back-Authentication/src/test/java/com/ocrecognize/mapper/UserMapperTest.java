@@ -1,12 +1,15 @@
 package com.ocrecognize.mapper;
 
 
+import com.ocrecognize.dto.RoleDto;
 import com.ocrecognize.dto.UserDto;
-import com.ocrecognize.entity.User;
+import com.ocrecognize.entity.RoleEntity;
+import com.ocrecognize.entity.UserEntity;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -20,40 +23,58 @@ public class UserMapperTest {
     @InjectMocks
     private UserMapperImpl userMapper;
 
-    private User user;
+    @Mock
+    private RoleMapperImpl roleMapper;
+
+    private UserEntity userEntity;
 
     private UserDto userDto;
 
-    private List<User> listUser;
+    private List<UserEntity> listUserEntity;
 
     private List<UserDto> listUserDto;
+
+    private RoleEntity roleEntity;
+
+    private RoleDto roleDto;
 
     @Before
     public void setUpBeforeClass(){
 
-        user = new User();
+        userEntity = new UserEntity();
         userDto = new UserDto();
-        listUser = new ArrayList<>();
+        listUserEntity = new ArrayList<>();
         listUserDto = new ArrayList<>();
+        roleEntity = new RoleEntity();
+        roleDto = new RoleDto();
 
-        user.setId(10L);
-        user.setFirstname("James");
-        user.setUsername("jimmy.villossel@gmail.com");
-        user.setLastname("Villossel");
-        user.setPassword("Test");
-        listUser.add(user);
+        roleEntity.setId(10L);
+        roleEntity.setRoleName("role_name");
+
+        roleDto.setId(10L);
+        roleDto.setRoleName("role_name");
+
+        userEntity.setId(10L);
+        userEntity.setFirstname("James");
+        userEntity.setUsername("jimmy.villossel@gmail.com");
+        userEntity.setLastname("Villossel");
+        userEntity.setPassword("Test");
+        userEntity.setRoleEntity(roleEntity);
+        listUserEntity.add(userEntity);
 
         userDto.setId(10L);
         userDto.setFirstname("James");
         userDto.setUsername("jimmy.villossel@gmail.com");
         userDto.setLastname("Villossel");
         userDto.setPassword("Test");
+        userDto.setRoleDto(roleDto);
         listUserDto.add(userDto);
     }
 
     @Test
     public void testDtoToEntity(){
-       assertEquals(user, userMapper.dtoToEntity(userDto));
+        Mockito.when(roleMapper.dtoToEntity(Mockito.any())).thenReturn(roleEntity);
+        assertEquals(userEntity, userMapper.dtoToEntity(userDto));
     }
 
     @Test
@@ -63,7 +84,8 @@ public class UserMapperTest {
 
     @Test
     public void testEntityToDto(){
-        assertEquals(userDto, userMapper.entityToDto(user));
+        Mockito.when(roleMapper.entityToDto(Mockito.any())).thenReturn(roleDto);
+        assertEquals(userDto, userMapper.entityToDto(userEntity));
     }
 
     @Test
@@ -73,7 +95,8 @@ public class UserMapperTest {
 
     @Test
     public void testListDtoToEntity(){
-        assertEquals(listUser, userMapper.listDtoToEntity(listUserDto));
+        Mockito.when(roleMapper.dtoToEntity(Mockito.any())).thenReturn(roleEntity);
+        assertEquals(listUserEntity, userMapper.listDtoToEntity(listUserDto));
     }
 
     @Test
@@ -83,7 +106,8 @@ public class UserMapperTest {
 
     @Test
     public void testListEntityToDto(){
-        assertEquals(listUserDto, userMapper.listEntityToDto(listUser));
+        Mockito.when(roleMapper.entityToDto(Mockito.any())).thenReturn(roleDto);
+        assertEquals(listUserDto, userMapper.listEntityToDto(listUserEntity));
     }
 
     @Test

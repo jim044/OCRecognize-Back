@@ -21,7 +21,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="OCRecognize-Back" options="-parameters" />
+      <module name="OCRecognize-Back" options="" />
       <module name="OCRecognize-Back-Authentication" options="-parameters" />
       <module name="OCRecognize-Back-Config" options="-parameters" />
       <module name="OCRecognize-Back-Gateway" options="-parameters" />

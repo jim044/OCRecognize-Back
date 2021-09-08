@@ -1,6 +1,7 @@
 package com.ocrecognize.utils;
 
 import com.nimbusds.jwt.SignedJWT;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -9,12 +10,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 public class JwtTokenUtil {
 
-    public static String generateToken(String username, List<String> roles){
+    public static List<String> getRolesFromToken(String token){
+        Function<Claims, List<String>> roles = a -> a.get("roles", List.class);
+        return getClaimFromToken(token, roles);
+    }
+
+    public static String generateToken(String username, String role){
         Map<String, Object> claims = new HashMap<>();
-        claims.put("roles", roles);
+        claims.put("roles", role);
 
         return doGenerateToken(claims, username, Constants.AUDIENCE_WEB);
     }
@@ -23,7 +30,7 @@ public class JwtTokenUtil {
         return SignedJWT.parse(token).getJWTClaimsSet().getSubjectClaim();
     }
 
-    private static String doGenerateToken(Map<String, Object> claims, String username, String audienceWeb) {
+    public static String doGenerateToken(Map<String, Object> claims, String username, String audienceWeb) {
 
         final Date createdDate = new Date();
         final Date expirationDate = calculateExpirationDate(createdDate);
@@ -38,7 +45,28 @@ public class JwtTokenUtil {
                 .compact();
     }
 
-    private static Date calculateExpirationDate(Date createdDate){
+    public static Boolean isTokenExpired(String token){
+        final Date expiration = getExpirationDateFromToken(token);
+        return expiration.before(new Date());
+    }
+
+    public static Date getExpirationDateFromToken(String token){
+        return getClaimFromToken(token, Claims::getExpiration);
+    }
+
+    public static <T> T getClaimFromToken(String token, Function<Claims, T> claimsTFunction){
+        final Claims claims = getAllClaimsFromToken(token);
+        return claimsTFunction.apply(claims);
+    }
+
+    public static Claims getAllClaimsFromToken(String token){
+        return Jwts.parser()
+                .setSigningKey(Constants.JWT_SECRET)
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    public static Date calculateExpirationDate(Date createdDate){
         return new Date(createdDate.getTime() + Constants.JWT_EXPIRATION * 1000);
     }
 }

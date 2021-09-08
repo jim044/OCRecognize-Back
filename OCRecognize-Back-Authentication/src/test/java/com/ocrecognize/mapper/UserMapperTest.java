@@ -38,6 +38,10 @@ public class UserMapperTest {
 
     private RoleDto roleDto;
 
+    private List<RoleEntity> roleEntityList;
+
+    private List<RoleDto> roleDtoList;
+
     @Before
     public void setUpBeforeClass(){
 
@@ -47,12 +51,16 @@ public class UserMapperTest {
         listUserDto = new ArrayList<>();
         roleEntity = new RoleEntity();
         roleDto = new RoleDto();
+        roleEntityList = new ArrayList<>();
+        roleDtoList = new ArrayList<>();
 
         roleEntity.setId(10L);
         roleEntity.setRoleName("role_name");
+        roleEntityList.add(roleEntity);
 
         roleDto.setId(10L);
         roleDto.setRoleName("role_name");
+        roleDtoList.add(roleDto);
 
         userEntity.setId(10L);
         userEntity.setFirstname("Jimmy");

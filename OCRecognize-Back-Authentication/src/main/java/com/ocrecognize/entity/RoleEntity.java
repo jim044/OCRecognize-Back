@@ -1,9 +1,11 @@
 package com.ocrecognize.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "ROLE")
@@ -19,4 +21,7 @@ public class RoleEntity implements Serializable {
 
     @Column(name = "role_name", length = 65)
     private String roleName;
+
+    @OneToMany(mappedBy = "roleEntity", fetch = FetchType.LAZY)
+    private List<UserEntity> userEntityList;
 }

@@ -2,6 +2,9 @@ package com.ocrecognize.config;
 
 import com.ocrecognize.config.jwt.JwtAccessDeniedHandler;
 import com.ocrecognize.config.jwt.JwtAuthenticationEntryPoint;
+import com.ocrecognize.config.jwt.JwtAuthenticationFilter;
+import com.ocrecognize.config.jwt.JwtAuthorizationFilter;
+import com.ocrecognize.service.impl.UserService;
 import com.ocrecognize.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -28,6 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AuthentificationLogoutSuccessHandler logoutSuccessHandler;
+
+    @Autowired
+    private UserService authenticationService;
 
     @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder){
@@ -48,6 +55,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new JwtAccessDeniedHandler();
     }
 
+    @Bean
+    public JwtAuthorizationFilter authorizationFilterBean(){
+        return new JwtAuthorizationFilter();
+    }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable();
@@ -63,6 +75,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .logoutSuccessUrl("/login")
                 .logoutSuccessHandler(logoutSuccessHandler);
+        
+        httpSecurity.addFilterBefore(authorizationFilterBean(), UsernamePasswordAuthenticationFilter.class)
+                .addFilter(new JwtAuthenticationFilter(super.authenticationManager(), authenticationService));
+
+        httpSecurity.headers().cacheControl();
 
     }
 

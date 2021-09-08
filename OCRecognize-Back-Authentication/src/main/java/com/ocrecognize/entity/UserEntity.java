@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "USER")
@@ -30,7 +31,7 @@ public class UserEntity implements Serializable {
     @Column(name="lastname")
     private String lastname;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="role_id")
     @JsonBackReference
     private RoleEntity roleEntity;

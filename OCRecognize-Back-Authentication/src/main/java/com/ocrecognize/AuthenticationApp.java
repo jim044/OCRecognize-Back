@@ -2,15 +2,14 @@ package com.ocrecognize;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-@EnableConfigServer
-public class ConfigService {
+@EnableEurekaClient
+public class AuthenticationApp {
 
     public static void main(String[] arguments) {
-        SpringApplication.run(ConfigService.class, arguments);
+        SpringApplication.run(AuthenticationApp.class, arguments);
     }
 
 }
-

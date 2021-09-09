@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -30,17 +31,19 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private UserService userService;
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response){
-        JwtAuthenticationRequest aut = null;
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        JwtAuthenticationRequest aut ;
 
         try {
             aut = new ObjectMapper().readValue(request.getInputStream(), JwtAuthenticationRequest.class);
+
+            return auth
+                    .authenticate(new UsernamePasswordAuthenticationToken(aut.getUsername(), aut.getPassword()));
         } catch (IOException e) {
             log.error("Can't retrieve data from request");
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
-        return auth.authenticate(new UsernamePasswordAuthenticationToken(aut.getUsername(), aut.getPassword()));
     }
 
     @Override

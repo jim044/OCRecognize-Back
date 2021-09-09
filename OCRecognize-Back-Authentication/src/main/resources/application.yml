@@ -1,0 +1,8 @@
+error:
+  whiteLabel:
+    enabled: false
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${eureka.server}

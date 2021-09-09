@@ -1,11 +1,33 @@
 server:
   port: 8080
 
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: authenticationService
-          uri: http://localhost:8081/
-          predicates:
-            - Path=/ms-authentication/**
+zuul:
+  host:
+    socket-timeout.millis: 150000
+    connect-timeout.millis: 300000
+  routes:
+    ms-authentication:
+      path: /ms-authentication/**
+      sensitiveHeaders:
+      serviceId: authentication-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${eureka.server}
+    registerWithEureka: false
+
+ribbon:
+    MaxAutoRetries: 10
+    ConnectTimeout: 300000
+    ReadTimeout: 300000
+
+# Increase the Hystrix timeout to 60s (globally)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 300000
+

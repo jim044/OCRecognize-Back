@@ -6,16 +6,19 @@ zuul:
     socket-timeout.millis: 150000
     connect-timeout.millis: 300000
   routes:
-    ms-authentication:
+    authentication-service:
       path: /ms-authentication/**
       sensitiveHeaders:
       serviceId: authentication-service
 
 eureka:
+  instance:
+    hostname: localhost
   client:
+    register-with-eureka: true
+    fetch-registry: true
     serviceUrl:
-      defaultZone: ${eureka.server}
-    registerWithEureka: false
+      defaultZone: http://localhost:8761/eureka/
 
 ribbon:
     MaxAutoRetries: 10
@@ -30,4 +33,7 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 300000
+
+
+
 

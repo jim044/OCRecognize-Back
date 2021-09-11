@@ -33,3 +33,13 @@ WOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/service/IUserServ
 NOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/dao/RoleDao.java,8\2\828d024be084394cc5ce294b129d11608a8d61b5
 …
 UOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/utils/JwtTokenUtil.java,7\b\7b81450f84c4384bb7acde68a01e47e7cdb337ce
+„
+TOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/entity/UserEntity.java,0\c\0cb419e2c03ad14eff7f7436bd66813293da5df8
+–
+fOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/config/jwt/JwtAuthenticationRequest.java,8\9\89f7908193c1c9b8f5d6692b2ae6aba85c60bfc0
+™
+iOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/config/jwt/JwtAuthenticationEntryPoint.java,e\a\ea9e844b4cd811ac8ea0bbe799fa52413aee5fe5
+”
+dOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/config/jwt/JwtAccessDeniedHandler.java,9\b\9bc5d157a1cd03bc9ccee2d5d92c972b2803ae4e
+R
+"OCRecognize-Back-Discovery/pom.xml,a\b\ab2265d7e0297b89175dbd209d0ed999a5508d5f

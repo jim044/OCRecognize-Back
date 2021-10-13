@@ -12,6 +12,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.4.2.Final/mapstruct-processor-1.4.2.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.jar" />
         </processorPath>
+        <module name="OCRecognize-Back-OCR" />
         <module name="OCRecognize-Back-Authentication" />
         <module name="OCRecognize-Back-Gateway" />
         <module name="OCRecognize-Back-Discovery" />
@@ -27,6 +28,7 @@
       <module name="OCRecognize-Back-Config" options="-parameters" />
       <module name="OCRecognize-Back-Discovery" options="-parameters" />
       <module name="OCRecognize-Back-Gateway" options="-parameters" />
+      <module name="OCRecognize-Back-OCR" options="-parameters" />
     </option>
   </component>
 </project>

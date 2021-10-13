@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) from pg_catalog.pg_namespace where nspname = 'ocr'
+      id: create-schema OCR
+      author: Jimmy
+      changes:
+        - sql:
+            comment: Ajout des droits de la BDD
+            endDelimiter: ;
+            sql: GRANT ALL PRIVILEGES ON DATABASE ocrecognize TO james
+        - sql:
+            comment: Creation du schema
+            sql: CREATE SCHEMA ocr
+        - sql:
+            comment: Grant config du schema
+            sql: GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA ocr TO james
+  - changeSet:
+      id: create-table-fournisseur
+      author: Jimmy
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: fournisseur
+              schemaName: ocr
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: fournisseur_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: fournisseur_name
+                  type: VARCHAR(250)
+            tableName: fournisseur
+            schemaName: ocr

@@ -10,6 +10,10 @@ zuul:
       path: /ms-authentication/**
       sensitiveHeaders:
       serviceId: authentication-service
+    ocr-service:
+      path: /ms-ocr/**
+      sensitiveHeaders:
+      serviceId: ocr-service
 
 eureka:
   instance:

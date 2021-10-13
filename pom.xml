@@ -13,6 +13,7 @@
         <module>OCRecognize-Back-Authentication</module>
         <module>OCRecognize-Back-Gateway</module>
         <module>OCRecognize-Back-Discovery</module>
+        <module>OCRecognize-Back-OCR</module>
     </modules>
 
     <properties>

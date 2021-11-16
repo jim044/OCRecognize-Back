@@ -1,7 +1,7 @@
 package com.ocrecognize.mapper;
 
-import com.ocrecognize.dto.UserDto;
-import com.ocrecognize.entity.UserEntity;
+import com.ocrecognize.model.dto.UserDto;
+import com.ocrecognize.model.entity.UserEntity;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 

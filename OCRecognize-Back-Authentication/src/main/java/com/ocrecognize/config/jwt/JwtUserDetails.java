@@ -1,6 +1,6 @@
 package com.ocrecognize.config.jwt;
 
-import com.ocrecognize.dto.UserDto;
+import com.ocrecognize.model.dto.UserDto;
 import com.ocrecognize.service.impl.UserService;
 import com.ocrecognize.utils.JwtUserFactory;
 import org.springframework.beans.factory.annotation.Autowired;

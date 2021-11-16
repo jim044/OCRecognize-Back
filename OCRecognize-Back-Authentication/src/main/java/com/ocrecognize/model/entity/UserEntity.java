@@ -1,11 +1,10 @@
-package com.ocrecognize.entity;
+package com.ocrecognize.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "USER")

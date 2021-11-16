@@ -1,4 +1,4 @@
-package com.ocrecognize.dto;
+package com.ocrecognize.model.dto;
 
 import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,7 +1,7 @@
 package com.ocrecognize.config.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ocrecognize.dto.RoleDto;
+import com.ocrecognize.model.dto.RoleDto;
 import com.ocrecognize.service.impl.UserService;
 import com.ocrecognize.utils.Constants;
 import com.ocrecognize.utils.JwtTokenUtil;

@@ -1,2 +1,9 @@
+com\ocrecognize\service\IOcrRequestService.class
+com\ocrecognize\config\WebSecurityConfig.class
+com\ocrecognize\controller\OCRController.class
+com\ocrecognize\config\jwt\JwtAuthorizationFilter.class
+com\ocrecognize\service\impl\OcrRequestService.class
+com\ocrecognize\utils\Constants.class
 com\ocrecognize\OcrApp.class
 com\ocrecognize\entity\FournisseurEntity.class
+com\ocrecognize\utils\JwtTokenUtil.class

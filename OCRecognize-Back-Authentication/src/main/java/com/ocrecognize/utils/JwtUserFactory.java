@@ -1,7 +1,7 @@
 package com.ocrecognize.utils;
 
-import com.ocrecognize.dto.JwtUser;
-import com.ocrecognize.dto.UserDto;
+import com.ocrecognize.model.dto.JwtUser;
+import com.ocrecognize.model.dto.UserDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

@@ -1,9 +1,6 @@
 package com.ocrecognize.service;
 
-import com.ocrecognize.dto.RoleDto;
-import com.ocrecognize.dto.UserDto;
-
-import java.util.List;
+import com.ocrecognize.model.dto.UserDto;
 
 public interface IUserService {
 

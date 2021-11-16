@@ -1,11 +1,9 @@
-package com.ocrecognize.dto;
+package com.ocrecognize.model.dto;
 
-import com.ocrecognize.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import java.util.List;
 
 @Data

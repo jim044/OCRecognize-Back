@@ -1,11 +1,8 @@
-package com.ocrecognize.dto;
+package com.ocrecognize.model.dto;
 
-import com.ocrecognize.entity.RoleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor

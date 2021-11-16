@@ -1,10 +1,10 @@
 package com.ocrecognize.mapper;
 
 
-import com.ocrecognize.dto.RoleDto;
-import com.ocrecognize.dto.UserDto;
-import com.ocrecognize.entity.RoleEntity;
-import com.ocrecognize.entity.UserEntity;
+import com.ocrecognize.model.dto.RoleDto;
+import com.ocrecognize.model.dto.UserDto;
+import com.ocrecognize.model.entity.RoleEntity;
+import com.ocrecognize.model.entity.UserEntity;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

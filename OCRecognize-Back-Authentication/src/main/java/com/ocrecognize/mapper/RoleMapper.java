@@ -1,7 +1,7 @@
 package com.ocrecognize.mapper;
 
-import com.ocrecognize.dto.RoleDto;
-import com.ocrecognize.entity.RoleEntity;
+import com.ocrecognize.model.dto.RoleDto;
+import com.ocrecognize.model.entity.RoleEntity;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;

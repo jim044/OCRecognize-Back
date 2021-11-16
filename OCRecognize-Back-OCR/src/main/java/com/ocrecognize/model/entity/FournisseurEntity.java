@@ -1,4 +1,4 @@
-package com.ocrecognize.entity;
+package com.ocrecognize.model.entity;
 
 import lombok.Data;
 import javax.persistence.*;

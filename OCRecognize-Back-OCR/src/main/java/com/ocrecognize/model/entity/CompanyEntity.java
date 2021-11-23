@@ -1,9 +1,9 @@
-package com.ocrecognize.model.pojo;
+package com.ocrecognize.model.entity;
 
 import lombok.Data;
 
 @Data
-public class CompanyFind {
+public class CompanyEntity {
 
     private int id;
     private String siren;

@@ -4,15 +4,21 @@ import com.ocrecognize.config.OCRProperties;
 import com.ocrecognize.model.pojo.ResponseAPISirene;
 import com.ocrecognize.model.pojo.ResponseOCRSpaceByUrl;
 import com.ocrecognize.service.IOcrRequestService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class OcrRequestService implements IOcrRequestService {
@@ -25,17 +31,18 @@ public class OcrRequestService implements IOcrRequestService {
     RestTemplate restTemplate;
 
     @Override
-    public Boolean archiveDocumentByUrl(String url, String ocrAPICompany) {
+    public Boolean archiveDocumentByUrl(String url, String ocrAPICompany) throws IOException {
         String getAllTextByUrlAndByOCRApiCompany = getAllTextByUrlAndByOCRApiCompany(url, ocrAPICompany);
 
         if(getAllTextByUrlAndByOCRApiCompany != null){
             String presumeCompanyName = identifyWordWithMostOccurence(getAllTextByUrlAndByOCRApiCompany);
-            if(verifyCompanyByNameWithApiCall(presumeCompanyName)){
+            if(verifyCompanyByNameWithApiCall(presumeCompanyName) != null){
                 String folderUri = createFolderByCompanyName(presumeCompanyName);
+                dowloadImageByUrl(url, folderUri);
             }
         }
 
-        return false;
+        return true;
     }
 
     @Override
@@ -46,11 +53,14 @@ public class OcrRequestService implements IOcrRequestService {
 
     @Override
     public String identifyWordWithMostOccurence(String textOcr) {
+        textOcr = textOcr.replaceAll("\\R", " ");
         String[] splitedString = textOcr.split(" ");
         int mostOccurenceWord = 0;
         String wordWithMostOccurence = null;
+
+
         for(String word : splitedString){
-            if(textOcr.indexOf(word) > mostOccurenceWord){
+            if(StringUtils.countMatches(textOcr, word) > mostOccurenceWord && !isNumeric(word)){
                 wordWithMostOccurence = word;
             }
         }
@@ -58,10 +68,17 @@ public class OcrRequestService implements IOcrRequestService {
         return wordWithMostOccurence;
     }
 
+    private boolean isNumeric(String strNum) {
+        Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+        if (strNum == null) {
+            return false;
+        }
+        return pattern.matcher(strNum).matches();
+    }
+
     @Override
-    public Boolean verifyCompanyByNameWithApiCall(String companyName) {
-        ResponseAPISirene resultResponse = restTemplate.getForObject(ocrProperties.getUrl().get("api-sirene") + companyName, ResponseAPISirene.class);
-        return true;
+    public ResponseAPISirene verifyCompanyByNameWithApiCall(String companyName) {
+        return restTemplate.getForObject(ocrProperties.getUrl().get("api-sirene") + companyName, ResponseAPISirene.class);
     }
 
     private String createFolderByCompanyName(String presumeCompanyName) {
@@ -73,7 +90,26 @@ public class OcrRequestService implements IOcrRequestService {
             e.printStackTrace();
         }
 
-        return path.getFileName().toString();
+        return path.toString();
+    }
+
+    private void dowloadImageByUrl(String urlString, String path) throws IOException {
+        URL url = new URL(urlString);
+        InputStream in = new BufferedInputStream(url.openStream());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+        int n = 0;
+        while (-1!=(n=in.read(buf)))
+        {
+            out.write(buf, 0, n);
+        }
+        out.close();
+        in.close();
+        byte[] response = out.toByteArray();
+
+        FileOutputStream fos = new FileOutputStream(path + "\\imageUrl.jpg");
+        fos.write(response);
+        fos.close();
     }
 
 }

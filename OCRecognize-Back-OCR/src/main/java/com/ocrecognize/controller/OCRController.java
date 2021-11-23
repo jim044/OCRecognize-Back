@@ -2,9 +2,10 @@ package com.ocrecognize.controller;
 
 import com.ocrecognize.service.IOcrRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/ocrrecognize")
@@ -13,8 +14,8 @@ public class OCRController {
     @Autowired
     private IOcrRequestService iOcrRequestService;
 
-    @GetMapping("/archiveDocumentByUrl")
-    public Boolean archiveDocumentByUrl() {
-        return iOcrRequestService.archiveDocumentByUrl("https://static.s-sfr.fr/media/ass_premiere_facture_sfr_v2.png", "ocr-space");
+    @PostMapping(path = "/archiveDocumentByUrl")
+    public Boolean archiveDocumentByUrl(@RequestParam String url) throws IOException {
+        return iOcrRequestService.archiveDocumentByUrl(url, "ocr-space");
     }
 }

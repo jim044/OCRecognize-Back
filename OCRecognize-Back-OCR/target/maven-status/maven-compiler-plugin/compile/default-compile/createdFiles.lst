@@ -1,9 +1,16 @@
+com\ocrecognize\model\entity\FournisseurEntity.class
 com\ocrecognize\service\IOcrRequestService.class
+com\ocrecognize\model\pojo\ResponseAPISirene.class
 com\ocrecognize\config\WebSecurityConfig.class
 com\ocrecognize\controller\OCRController.class
+com\ocrecognize\model\pojo\ResponseOCRSpaceByUrl.class
+com\ocrecognize\model\pojo\TextOverlay.class
 com\ocrecognize\config\jwt\JwtAuthorizationFilter.class
+com\ocrecognize\model\pojo\CompanyFind.class
+com\ocrecognize\config\OCRProperties.class
 com\ocrecognize\service\impl\OcrRequestService.class
 com\ocrecognize\utils\Constants.class
+com\ocrecognize\model\pojo\ParsedResults.class
 com\ocrecognize\OcrApp.class
-com\ocrecognize\entity\FournisseurEntity.class
 com\ocrecognize\utils\JwtTokenUtil.class
+com\ocrecognize\service\impl\RestemplateCustomService.class

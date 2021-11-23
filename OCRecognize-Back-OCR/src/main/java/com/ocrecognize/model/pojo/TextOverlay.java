@@ -1,5 +1,6 @@
 package com.ocrecognize.model.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -7,11 +8,13 @@ import java.util.List;
 @Data
 public class TextOverlay {
 
+    @JsonProperty(value="Lines")
     private List<String> lines;
 
-    private String parsedText;
+    @JsonProperty(value="HasOverlay")
+    private Boolean hasOverlay;
 
-    private String errorMessage;
+    @JsonProperty(value="Message")
+    private String message;
 
-    private String errorDetails;
 }

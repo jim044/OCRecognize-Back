@@ -10,4 +10,6 @@ import java.util.Map;
 public class OCRProperties {
 
     private Map<String, String> apiKey;
+    private Map<String, String> url;
+    private String archiveFolder;
 }

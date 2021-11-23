@@ -13,8 +13,8 @@ public class OCRController {
     @Autowired
     private IOcrRequestService iOcrRequestService;
 
-    @GetMapping("/getAllTextByUrl")
-    public String getAllTextByUrl() {
-        return iOcrRequestService.getAllText();
+    @GetMapping("/archiveDocumentByUrl")
+    public Boolean archiveDocumentByUrl() {
+        return iOcrRequestService.archiveDocumentByUrl("https://static.s-sfr.fr/media/ass_premiere_facture_sfr_v2.png", "ocr-space");
     }
 }

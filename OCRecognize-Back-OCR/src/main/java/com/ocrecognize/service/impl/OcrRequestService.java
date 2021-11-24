@@ -47,13 +47,13 @@ public class OcrRequestService implements IOcrRequestService {
 
     @Override
     public String getAllTextByUrlAndByOCRApiCompany(String url, String ocrAPICompany) {
-        ResponseOCRSpaceByUrl resultResponse = restTemplate.getForObject(ocrProperties.getUrl().get(ocrAPICompany).replace("{apiKey}", ocrProperties.getApiKey().get(ocrAPICompany)) + "&url=" + url, ResponseOCRSpaceByUrl.class);
+        ResponseOCRSpaceByUrl resultResponse = restTemplate.getForObject(ocrProperties.getUrl().get(ocrAPICompany).replace("{apiKey}", ocrProperties.getApiKey().get(ocrAPICompany)) + "&url=" + url + "&language=fre", ResponseOCRSpaceByUrl.class);
         return resultResponse.getParsedResults().size() > 0 ? resultResponse.getParsedResults().get(0).getParsedText() : null;
     }
 
     @Override
     public String identifyWordWithMostOccurence(String textOcr) {
-        textOcr = textOcr.replaceAll("\\R", " ");
+        textOcr = textOcr.replaceAll("\\R", " ").replaceAll("[^a-zA-Z0-9]", " ");
         String[] splitedString = textOcr.split(" ");
         int mostOccurenceWord = 0;
         String wordWithMostOccurence = null;
@@ -78,7 +78,7 @@ public class OcrRequestService implements IOcrRequestService {
 
     @Override
     public ResponseAPISirene verifyCompanyByNameWithApiCall(String companyName) {
-        return restTemplate.getForObject(ocrProperties.getUrl().get("api-sirene") + companyName, ResponseAPISirene.class);
+        return restTemplate.getForObject(ocrProperties.getUrl().get("api-sirene") + companyName + "?page=1&per_page=100", ResponseAPISirene.class);
     }
 
     private String createFolderByCompanyName(String presumeCompanyName) {

@@ -12,5 +12,5 @@ public interface IOcrRequestService {
 
     Boolean archiveDocumentByUrl(String url, String ocrAPICompany) throws IOException;
 
-    ResponseAPISirene verifyCompanyByNameWithApiCall(String companyName);
+    String getFirstWordInString(String textOcr);
 }

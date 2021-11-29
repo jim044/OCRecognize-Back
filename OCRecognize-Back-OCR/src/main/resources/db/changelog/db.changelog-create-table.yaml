@@ -41,7 +41,92 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
-                  name: fournisseur_name
+                  name: siren
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nic
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: siret
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: datefin
                   type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: datedebut
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: etatadministratifetablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: changementetatadministratifetablissement
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: enseigne1etablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: enseigne2etablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: enseigne3etablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: changementenseigneetablissement
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: denominationusuelleetablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: changementdenominationusuelleetablissement
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: activiteprincipaleetablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nomenclatureactiviteprincipaleetablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: changementactiviteprincipaleetablissement
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: caractereemployeuretablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: changementcaractereemployeuretablissement
+                  type: BOOLEAN
             tableName: fournisseur
             schemaName: ocr

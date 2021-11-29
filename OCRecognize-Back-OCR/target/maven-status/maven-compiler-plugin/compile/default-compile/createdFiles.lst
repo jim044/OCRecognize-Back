@@ -1,4 +1,6 @@
+com\ocrecognize\service\IBatchService.class
 com\ocrecognize\service\IOcrRequestService.class
+com\ocrecognize\model\dto\FournisseurDto.class
 com\ocrecognize\model\pojo\ResponseAPISirene.class
 com\ocrecognize\config\WebSecurityConfig.class
 com\ocrecognize\model\entity\CompanyEntity.class
@@ -6,14 +8,19 @@ com\ocrecognize\service\impl\OcrRequestService.class
 com\ocrecognize\service\impl\RestemplateCustomService$1.class
 com\ocrecognize\utils\Constants.class
 com\ocrecognize\OcrApp.class
+com\ocrecognize\dao\FournisseurDao.class
+com\ocrecognize\repository\FournisseurRepository.class
 com\ocrecognize\service\impl\RestemplateCustomService.class
 com\ocrecognize\model\entity\FournisseurEntity.class
 com\ocrecognize\service\impl\RestemplateCustomService$2.class
+com\ocrecognize\mapper\FournisseurMapperImpl.class
 com\ocrecognize\controller\OCRController.class
 com\ocrecognize\model\pojo\ResponseOCRSpaceByUrl.class
 com\ocrecognize\model\pojo\TextOverlay.class
 com\ocrecognize\config\jwt\JwtAuthorizationFilter.class
 com\ocrecognize\config\OCRProperties.class
 com\ocrecognize\model\pojo\ParsedResults.class
+com\ocrecognize\mapper\FournisseurMapper.class
+com\ocrecognize\service\impl\BatchService.class
 com\ocrecognize\model\dto\CompanyDto.class
 com\ocrecognize\utils\JwtTokenUtil.class

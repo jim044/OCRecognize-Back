@@ -1,6 +1,8 @@
 package com.ocrecognize.service.impl;
 
 import com.ocrecognize.config.OCRProperties;
+import com.ocrecognize.dao.FournisseurDao;
+import com.ocrecognize.model.dto.FournisseurDto;
 import com.ocrecognize.model.pojo.ResponseAPISirene;
 import com.ocrecognize.model.pojo.ResponseOCRSpaceByUrl;
 import com.ocrecognize.service.IOcrRequestService;
@@ -17,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,15 +31,19 @@ public class OcrRequestService implements IOcrRequestService {
 
     @Autowired
     @Qualifier("ClientAuthentificationRestemplate")
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private FournisseurDao fournisseurDao;
 
     @Override
     public Boolean archiveDocumentByUrl(String url, String ocrAPICompany) throws IOException {
         String getAllTextByUrlAndByOCRApiCompany = getAllTextByUrlAndByOCRApiCompany(url, ocrAPICompany);
 
         if(getAllTextByUrlAndByOCRApiCompany != null){
-            String presumeCompanyName = identifyWordWithMostOccurence(getAllTextByUrlAndByOCRApiCompany);
-            if(verifyCompanyByNameWithApiCall(presumeCompanyName) != null){
+            String presumeCompanyName = getFirstWordInString(getAllTextByUrlAndByOCRApiCompany);
+            if(presumeCompanyName == null)  presumeCompanyName = identifyWordWithMostOccurence(getAllTextByUrlAndByOCRApiCompany);
+            if(presumeCompanyName != null){
                 String folderUri = createFolderByCompanyName(presumeCompanyName);
                 dowloadImageByUrl(url, folderUri);
             }
@@ -52,12 +59,25 @@ public class OcrRequestService implements IOcrRequestService {
     }
 
     @Override
+    public String getFirstWordInString(String textOcr){
+        textOcr = textOcr.replaceAll("\\R", " ").replaceAll("[^a-zA-Z0-9]", " ");
+        String[] splitedString = textOcr.split(" ");
+
+        String firstWord = null;
+        List<FournisseurDto> fournisseurDtoList = fournisseurDao.getFournisseurByFournisseurName(splitedString[0]);
+        if(fournisseurDtoList.size() > 0){
+            firstWord = splitedString[0];
+        }
+
+        return firstWord;
+    }
+
+    @Override
     public String identifyWordWithMostOccurence(String textOcr) {
         textOcr = textOcr.replaceAll("\\R", " ").replaceAll("[^a-zA-Z0-9]", " ");
         String[] splitedString = textOcr.split(" ");
         int mostOccurenceWord = 0;
         String wordWithMostOccurence = null;
-
 
         for(String word : splitedString){
             if(StringUtils.countMatches(textOcr, word) > mostOccurenceWord && !isNumeric(word)){
@@ -74,11 +94,6 @@ public class OcrRequestService implements IOcrRequestService {
             return false;
         }
         return pattern.matcher(strNum).matches();
-    }
-
-    @Override
-    public ResponseAPISirene verifyCompanyByNameWithApiCall(String companyName) {
-        return restTemplate.getForObject(ocrProperties.getUrl().get("api-sirene") + companyName + "?page=1&per_page=100", ResponseAPISirene.class);
     }
 
     private String createFolderByCompanyName(String presumeCompanyName) {

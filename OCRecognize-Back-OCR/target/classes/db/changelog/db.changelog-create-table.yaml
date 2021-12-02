@@ -130,3 +130,15 @@ databaseChangeLog:
                   type: BOOLEAN
             tableName: fournisseur
             schemaName: ocr
+  - changeSet:
+      id: createIndex-enseigne1etablissement
+      author: Jimmy
+      changes:
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  name: enseigne1etablissement
+            indexName: fournisseur_enseigne1etablissement_idx
+            schemaName: ocr
+            tableName: fournisseur

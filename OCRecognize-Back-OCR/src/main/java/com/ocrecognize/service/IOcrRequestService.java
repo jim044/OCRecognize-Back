@@ -6,8 +6,6 @@ public interface IOcrRequestService {
 
     String getAllTextByUrlAndByOCRApiCompanyByGetRequest(String url, String ocrAPICompany);
 
-    String getAllTextByUrlAndByOCRApiCompanyByPostRequest(String url, String ocrAPICompany);
-
     Boolean archiveDocumentByUrl(String url, String ocrAPICompany) throws IOException;
 
     String getFournisseurNameByOCRString(String textOcr);

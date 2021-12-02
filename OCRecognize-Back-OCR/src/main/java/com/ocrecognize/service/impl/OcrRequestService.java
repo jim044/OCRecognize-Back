@@ -1,9 +1,11 @@
 package com.ocrecognize.service.impl;
 
+import com.netflix.discovery.converters.Auto;
 import com.ocrecognize.config.OCRProperties;
 import com.ocrecognize.dao.FournisseurDao;
 import com.ocrecognize.model.dto.FournisseurDto;
 import com.ocrecognize.model.pojo.ResponseOCRSpaceByUrl;
+import com.ocrecognize.service.IBatchData;
 import com.ocrecognize.service.IOcrRequestService;
 import com.ocrecognize.utils.DateUtils;
 import com.ocrecognize.utils.UtilsString;
@@ -38,13 +40,16 @@ public class OcrRequestService implements IOcrRequestService {
     @Autowired
     private FournisseurDao fournisseurDao;
 
+    @Autowired
+    private IBatchData batchData;
+
     @Override
     public Boolean archiveDocumentByUrl(String url, String ocrAPICompany) throws IOException {
-        String getAllTextByUrlAndByOCRApiCompany = getAllTextByUrlAndByOCRApiCompanyByGetRequest(url, ocrAPICompany);
-        // TODO : Mettre en place la requête d'appel vers Microsoft Vision ici
+        batchData.insertNewDataForFournisseur();
+        String getAllTextByUrlAndByOCRApiCompanyByGetRequest = getAllTextByUrlAndByOCRApiCompanyByGetRequest(url, "ocr-space");
         
-        if(getAllTextByUrlAndByOCRApiCompany != null){
-            String presumeFournisseurName = getFournisseurNameByOCRString(getAllTextByUrlAndByOCRApiCompany);
+        if(getAllTextByUrlAndByOCRApiCompanyByGetRequest != null){
+            String presumeFournisseurName = getFournisseurNameByOCRString(getAllTextByUrlAndByOCRApiCompanyByGetRequest);
             if(presumeFournisseurName != null){
                 String folderUri = createFolderByFournisseurName(presumeFournisseurName);
                 dowloadImageByUrl(presumeFournisseurName, url, folderUri);
@@ -57,19 +62,6 @@ public class OcrRequestService implements IOcrRequestService {
     @Override
     public String getAllTextByUrlAndByOCRApiCompanyByGetRequest(String url, String ocrAPICompany) {
         ResponseOCRSpaceByUrl resultResponse = restTemplate.getForObject(ocrProperties.getUrl().get(ocrAPICompany).replace("{apiKey}", ocrProperties.getApiKey().get(ocrAPICompany)) + "&url=" + url + "&language=fre", ResponseOCRSpaceByUrl.class);
-        return getResultResponseByOCRApiCompany(resultResponse);
-    }
-
-    @Override
-    public String getAllTextByUrlAndByOCRApiCompanyByPostRequest(String url, String ocrAPICompany) {
-        JSONObject urlRequestJsonObject = new JSONObject();
-        urlRequestJsonObject.put("url", "http://example.com/images/test.jpg");
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("x-rapidapi-host", "microsoft-computer-vision3.p.rapidapi.com");
-        headers.add("x-rapidapi-key", ocrProperties.getApiKey().get(ocrAPICompany));
-        HttpEntity<String> request =  new HttpEntity<>(urlRequestJsonObject.toString(), headers);
-        ResponseOCRSpaceByUrl resultResponse = restTemplate.postForObject(ocrProperties.getUrl().get(ocrAPICompany) + "&language=fre", request, ResponseOCRSpaceByUrl.class);
         return getResultResponseByOCRApiCompany(resultResponse);
     }
 

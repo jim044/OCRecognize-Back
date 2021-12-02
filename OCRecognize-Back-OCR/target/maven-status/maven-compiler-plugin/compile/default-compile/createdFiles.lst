@@ -12,6 +12,7 @@ com\ocrecognize\repository\FournisseurRepository.class
 com\ocrecognize\utils\DateUtils.class
 com\ocrecognize\config\restemplate\RestemplateCustomService.class
 com\ocrecognize\model\entity\FournisseurEntity.class
+com\ocrecognize\service\IBatchData.class
 com\ocrecognize\mapper\FournisseurMapperImpl.class
 com\ocrecognize\controller\OCRController.class
 com\ocrecognize\model\pojo\ResponseOCRSpaceByUrl.class

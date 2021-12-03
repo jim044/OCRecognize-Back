@@ -18,4 +18,29 @@ public interface FournisseurMapper {
     List<FournisseurDto> fournisseursEntitesToFournisseursDtos(List<FournisseurEntity> fournisseursEntities);
 
     List<FournisseurEntity> fournisseursDtosToFournisseursEntities(List<FournisseurDto> fournisseursDtos);
+
+    default FournisseurDto convertStringCollectionToFournisseurDto(String[] collectionFournisseur){
+        FournisseurDto fournisseurDto = new FournisseurDto();
+
+        fournisseurDto.setSiren(Long.valueOf(collectionFournisseur[0]));
+        fournisseurDto.setNic(Long.valueOf(collectionFournisseur[1]));
+        fournisseurDto.setSiret(Long.valueOf(collectionFournisseur[2]));
+        fournisseurDto.setDateFin(collectionFournisseur[3]);
+        fournisseurDto.setDateDebut(collectionFournisseur[4]);
+        fournisseurDto.setEtatAdministratifEtablissement(collectionFournisseur[5]);
+        fournisseurDto.setChangementEtatAdministratifEtablissement(Boolean.valueOf(collectionFournisseur[6]));
+        fournisseurDto.setEnseigne1Etablissement(collectionFournisseur[7]);
+        fournisseurDto.setEnseigne21Etablissement(collectionFournisseur[8]);
+        fournisseurDto.setEnseigne3Etablissement(collectionFournisseur[9]);
+        fournisseurDto.setChangementEnseigneEtablissement(Boolean.valueOf(collectionFournisseur[10]));
+        fournisseurDto.setDenominationUsuelleEtablissement(collectionFournisseur[11]);
+        fournisseurDto.setChangementDenominationUsuelleEtablissement(Boolean.valueOf(collectionFournisseur[12]));
+        fournisseurDto.setActivitePrincipaleEtablissement(collectionFournisseur[13]);
+        fournisseurDto.setNomenclatureActivitePrincipaleEtablissement(collectionFournisseur[14]);
+        fournisseurDto.setChangementActivitePrincipaleEtablissement(Boolean.valueOf(collectionFournisseur[15]));
+        fournisseurDto.setCaractereEmployeurEtablissement(collectionFournisseur[16]);
+        fournisseurDto.setChangementCaractereEmployeurEtablissement(Boolean.valueOf(collectionFournisseur[17]));
+
+        return fournisseurDto;
+    }
 }

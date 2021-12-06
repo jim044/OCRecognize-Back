@@ -20,4 +20,8 @@ public class FournisseurDao {
     public List<FournisseurDto> getFournisseurByFournisseurName(String fournisseurName){
         return fournisseurMapper.fournisseursEntitesToFournisseursDtos(fournisseurRepository.findAllByFournisseurName(fournisseurName));
     }
+
+    public FournisseurDto saveAndUpdateFournisseur(FournisseurDto fournisseurDto) {
+        return fournisseurMapper.fournisseurEntityToFournisseurDto(fournisseurRepository.save(fournisseurMapper.fournisseurDtoToFournisseurEntity(fournisseurDto)));
+    }
 }

@@ -36,10 +36,10 @@ public interface FournisseurMapper {
         fournisseurDto.setDenominationUsuelleEtablissement(collectionFournisseur[11]);
         fournisseurDto.setChangementDenominationUsuelleEtablissement(Boolean.valueOf(collectionFournisseur[12]));
         fournisseurDto.setActivitePrincipaleEtablissement(collectionFournisseur[13]);
-        fournisseurDto.setNomenclatureActivitePrincipaleEtablissement(collectionFournisseur[14]);
-        fournisseurDto.setChangementActivitePrincipaleEtablissement(Boolean.valueOf(collectionFournisseur[15]));
-        fournisseurDto.setCaractereEmployeurEtablissement(collectionFournisseur[16]);
-        fournisseurDto.setChangementCaractereEmployeurEtablissement(Boolean.valueOf(collectionFournisseur[17]));
+        fournisseurDto.setNomenclatureActivitePrincipaleEtablissement(collectionFournisseur.length > 14 ? collectionFournisseur[14] : null);
+        fournisseurDto.setChangementActivitePrincipaleEtablissement(collectionFournisseur.length > 15 ? Boolean.valueOf(collectionFournisseur[15]) : null);
+        fournisseurDto.setCaractereEmployeurEtablissement(collectionFournisseur.length > 16 ? collectionFournisseur[16] : null);
+        fournisseurDto.setChangementCaractereEmployeurEtablissement(collectionFournisseur.length > 17 ? Boolean.valueOf(collectionFournisseur[17]) : null);
 
         return fournisseurDto;
     }

@@ -1,5 +1,6 @@
 package com.ocrecognize.service.impl;
 
+import com.ocrecognize.dao.FournisseurDao;
 import com.ocrecognize.mapper.FournisseurMapper;
 import com.ocrecognize.model.dto.FournisseurDto;
 import com.ocrecognize.service.IBatchData;
@@ -17,6 +18,9 @@ public class BatchData implements IBatchData {
     @Autowired
     private FournisseurMapper fournisseurMapper;
 
+    @Autowired
+    FournisseurDao fournisseurDao;
+
 
     @Override
     public void insertNewDataForFournisseur() {
@@ -25,15 +29,12 @@ public class BatchData implements IBatchData {
         String fileName = "D:\\Projet OCRecognize\\BDD Etablissement Sirene\\StockEtablissementHistorique_utf8\\StockEtablissementHistorique_utf8.csv";
         try
         {
-            //Get the CSVReader instance with specifying the delimiter to be used
             reader = new CSVReader(new FileReader(fileName), ',', '\'', 1);
-
             String[] nextLine;
-
-            //Read one line at a time
             while ((nextLine = reader.readNext()) != null)
             {
                 fournisseurDto = fournisseurMapper.convertStringCollectionToFournisseurDto(nextLine);
+                fournisseurDto = fournisseurDao.saveAndUpdateFournisseur(fournisseurDto);
             }
         }
         catch (Exception e) {
@@ -46,29 +47,6 @@ public class BatchData implements IBatchData {
                 e.printStackTrace();
             }
         }
-
-        /**
-         *Long startTime = System.nanoTime();
-         *
-         *         List<FournisseurPojo> fournisseurDtoList = null;
-         *         try {
-         *             fournisseurDtoList = new CsvToBeanBuilder(new FileReader(fileName))
-         *                     .withType(FournisseurPojo.class)
-         *                     .build()
-         *                     .parse();
-         *
-         *             fournisseurDtoList.forEach(fournisseurPojo -> {
-         *                 log.info(fournisseurPojo.getActivitePrincipaleEtablissement());
-         *             });
-         *         } catch (FileNotFoundException e) {
-         *             e.printStackTrace();
-         *         }
-         *
-         *         Long endTime = System.nanoTime();
-         *         Long duration = (endTime - startTime);
-         *         log.info("Duration : " + duration);
-         */
-
     }
 
 }

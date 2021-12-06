@@ -1,7 +1,8 @@
 D:\Projet OCRecognize\OCRecognize-Back\OCRecognize-Back-OCR\src\main\java\com\ocrecognize\config\jwt\JwtAuthorizationFilter.java
+D:\Projet OCRecognize\OCRecognize-Back\OCRecognize-Back-OCR\src\main\java\com\ocrecognize\model\pojo\FournisseurPojo.java
 D:\Projet OCRecognize\OCRecognize-Back\OCRecognize-Back-OCR\src\main\java\com\ocrecognize\service\IOcrRequestService.java
-D:\Projet OCRecognize\OCRecognize-Back\OCRecognize-Back-OCR\src\main\java\com\ocrecognize\model\entity\CompanyEntity.java
 D:\Projet OCRecognize\OCRecognize-Back\OCRecognize-Back-OCR\src\main\java\com\ocrecognize\model\pojo\ParsedResults.java
+D:\Projet OCRecognize\OCRecognize-Back\OCRecognize-Back-OCR\src\main\java\com\ocrecognize\service\impl\BatchData.java
 D:\Projet OCRecognize\OCRecognize-Back\OCRecognize-Back-OCR\src\main\java\com\ocrecognize\model\entity\FournisseurEntity.java
 D:\Projet OCRecognize\OCRecognize-Back\OCRecognize-Back-OCR\src\main\java\com\ocrecognize\utils\Constants.java
 D:\Projet OCRecognize\OCRecognize-Back\OCRecognize-Back-OCR\src\main\java\com\ocrecognize\config\restemplate\RestemplateCustomService.java

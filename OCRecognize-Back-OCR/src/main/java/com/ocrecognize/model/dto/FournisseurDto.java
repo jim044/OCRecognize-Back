@@ -1,6 +1,5 @@
 package com.ocrecognize.model.dto;
 
-import com.opencsv.bean.CsvBindByPosition;
 import lombok.Data;
 
 @Data

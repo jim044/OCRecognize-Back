@@ -1,14 +1,15 @@
 com\ocrecognize\service\IOcrRequestService.class
 com\ocrecognize\model\dto\FournisseurDto.class
 com\ocrecognize\config\WebSecurityConfig.class
-com\ocrecognize\model\entity\CompanyEntity.class
 com\ocrecognize\config\restemplate\RestemplateCustomService$1.class
 com\ocrecognize\service\impl\OcrRequestService.class
 com\ocrecognize\utils\UtilsString.class
 com\ocrecognize\utils\Constants.class
+com\ocrecognize\service\impl\BatchData.class
 com\ocrecognize\OcrApp.class
 com\ocrecognize\dao\FournisseurDao.class
 com\ocrecognize\repository\FournisseurRepository.class
+com\ocrecognize\model\pojo\FournisseurPojo.class
 com\ocrecognize\utils\DateUtils.class
 com\ocrecognize\config\restemplate\RestemplateCustomService.class
 com\ocrecognize\model\entity\FournisseurEntity.class

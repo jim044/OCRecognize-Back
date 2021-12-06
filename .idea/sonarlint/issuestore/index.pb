@@ -61,8 +61,6 @@ dOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/config/jwt/JwtAcc
 UOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/utils/JwtTokenUtil.java,7\b\7b81450f84c4384bb7acde68a01e47e7cdb337ce
 z
 JOCRecognize-Back-OCR/src/main/java/com/ocrecognize/utils/JwtTokenUtil.java,3\1\3170719b5d44c85692aa2f24fab9a8ef37e39336
-‰
-YOCRecognize-Back-OCR/src/main/java/com/ocrecognize/config/jwt/JwtAuthorizationFilter.java,7\0\70a3c595f3c500c30a02de882a00502f41346747
 ”
 dOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/config/jwt/JwtAuthorizationFilter.java,6\5\657500a215e9914cdd9c94bcd87db4ff84d791aa
 ‹
@@ -99,3 +97,21 @@ L
 OCRecognize-Back-OCR/pom.xml,3\2\329369712c42fa163b253f71f1994c225b61eb95
 €
 POCRecognize-Back-OCR/src/main/java/com/ocrecognize/controller/OCRController.java,d\d\ddcb6f0e6d6a040b0461e51f3705365dc7b0c1ca
+€
+POCRecognize-Back-OCR/src/main/java/com/ocrecognize/mapper/FournisseurMapper.java,3\a\3ab3f1cff3ba410d32c1dc3f51011de6687fe41d
+€
+POCRecognize-Back-OCR/src/main/java/com/ocrecognize/model/dto/FournisseurDto.java,0\f\0f414bea5c46109581a8b5628364a489b253dd91
+‚
+ROCRecognize-Back-OCR/src/main/java/com/ocrecognize/model/pojo/FournisseurPojo.java,9\f\9fbaedc86848af7df2132339c2d9bf98b6c8fc04
+†
+VOCRecognize-Back-OCR/src/main/java/com/ocrecognize/model/entity/FournisseurEntity.java,f\1\f10f32ce76944f47b1510b87c69289ad53ef513d
+‰
+YOCRecognize-Back-OCR/src/main/java/com/ocrecognize/config/jwt/JwtAuthorizationFilter.java,7\0\70a3c595f3c500c30a02de882a00502f41346747
+z
+JOCRecognize-Back-OCR/src/main/java/com/ocrecognize/dao/FournisseurDao.java,5\4\547b194fa730e6666e37dfa5b9859bf9b025014f
+†
+VOCRecognize-Back-OCR/src/main/java/com/ocrecognize/service/impl/OcrRequestService.java,2\5\25515d82164d7f674e9dcac5fe37f8f498cad56b
+z
+JOCRecognize-Back-OCR/src/main/java/com/ocrecognize/service/IBatchData.java,5\3\53a4c5f55331c3d2b160415cebdd8b53ee80761f
+~
+NOCRecognize-Back-OCR/src/main/java/com/ocrecognize/service/impl/BatchData.java,5\2\52bd858e56cc4fbe83021750ec4404cbf79493a6

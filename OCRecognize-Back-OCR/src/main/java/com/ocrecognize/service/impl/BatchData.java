@@ -34,7 +34,13 @@ public class BatchData implements IBatchData {
             while ((nextLine = reader.readNext()) != null)
             {
                 fournisseurDto = fournisseurMapper.convertStringCollectionToFournisseurDto(nextLine);
-                fournisseurDto = fournisseurDao.saveAndUpdateFournisseur(fournisseurDto);
+                try {
+                    if(fournisseurDto.getEnseigne1Etablissement().length() < 249){
+                        fournisseurDto = fournisseurDao.saveAndUpdateFournisseur(fournisseurDto);
+                    }
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         }
         catch (Exception e) {

@@ -3,3 +3,4 @@ OCRecognize-Back-Config/target/
 OCRecognize-Back-Gateway/target/
 .idea/sonarlint/issuestore/c/d/cd48b7638a259d57cc5d63b9f8ebefc55ea760b6
 .idea/
+OCRecognize-Back-OCR/src/main/resources/StockEtablissement/StockEtablissementHistorique_utf8.csv

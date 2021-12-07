@@ -45,7 +45,6 @@ public class OcrRequestService implements IOcrRequestService {
 
     @Override
     public Boolean archiveDocumentByUrl(String url, String ocrAPICompany) throws IOException {
-        batchData.insertNewDataForFournisseur();
         String getAllTextByUrlAndByOCRApiCompanyByGetRequest = getAllTextByUrlAndByOCRApiCompanyByGetRequest(url, "ocr-space");
         
         if(getAllTextByUrlAndByOCRApiCompanyByGetRequest != null){

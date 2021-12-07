@@ -24,4 +24,8 @@ public class FournisseurDao {
     public FournisseurDto saveAndUpdateFournisseur(FournisseurDto fournisseurDto) {
         return fournisseurMapper.fournisseurEntityToFournisseurDto(fournisseurRepository.save(fournisseurMapper.fournisseurDtoToFournisseurEntity(fournisseurDto)));
     }
+
+    public void deleteAll(){
+        fournisseurRepository.deleteAll();
+    }
 }

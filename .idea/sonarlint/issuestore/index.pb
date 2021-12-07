@@ -71,8 +71,6 @@ W
 'OCRecognize-Back-Authentication/pom.xml,c\d\cd48b7638a259d57cc5d63b9f8ebefc55ea760b6
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-n
->OCRecognize-Back-OCR/src/main/java/com/ocrecognize/OcrApp.java,a\4\a441d1165d3f5985df87c266a0a8f22e176a045b
 w
 GOCRecognize-Back-OCR/src/main/java/com/ocrecognize/utils/DateUtils.java,2\6\2651bfb6bf6209bcebac6fc9855b29afce5e905f
 y
@@ -89,8 +87,6 @@ POCRecognize-Back-OCR/src/main/java/com/ocrecognize/model/pojo/ParsedResults.jav
 XOCRecognize-Back-OCR/src/main/java/com/ocrecognize/repository/FournisseurRepository.java,d\e\deeccfb86822f8d7be9abb68615fd1919525fb97
 €
 POCRecognize-Back-OCR/src/main/java/com/ocrecognize/config/WebSecurityConfig.java,9\e\9e99a1581acdcfc33cb03d1ad82266b035488eeb
-|
-LOCRecognize-Back-OCR/src/main/java/com/ocrecognize/config/OCRProperties.java,e\b\ebffd5beae8bcc09f1103812ebdadda2e17afa67
 ‚
 ROCRecognize-Back-OCR/src/main/java/com/ocrecognize/service/IOcrRequestService.java,d\8\d89c96adf345437ca60c36d03bd5ad8e0feda310
 L
@@ -107,11 +103,3 @@ ROCRecognize-Back-OCR/src/main/java/com/ocrecognize/model/pojo/FournisseurPojo.j
 VOCRecognize-Back-OCR/src/main/java/com/ocrecognize/model/entity/FournisseurEntity.java,f\1\f10f32ce76944f47b1510b87c69289ad53ef513d
 ‰
 YOCRecognize-Back-OCR/src/main/java/com/ocrecognize/config/jwt/JwtAuthorizationFilter.java,7\0\70a3c595f3c500c30a02de882a00502f41346747
-z
-JOCRecognize-Back-OCR/src/main/java/com/ocrecognize/dao/FournisseurDao.java,5\4\547b194fa730e6666e37dfa5b9859bf9b025014f
-†
-VOCRecognize-Back-OCR/src/main/java/com/ocrecognize/service/impl/OcrRequestService.java,2\5\25515d82164d7f674e9dcac5fe37f8f498cad56b
-z
-JOCRecognize-Back-OCR/src/main/java/com/ocrecognize/service/IBatchData.java,5\3\53a4c5f55331c3d2b160415cebdd8b53ee80761f
-~
-NOCRecognize-Back-OCR/src/main/java/com/ocrecognize/service/impl/BatchData.java,5\2\52bd858e56cc4fbe83021750ec4404cbf79493a6

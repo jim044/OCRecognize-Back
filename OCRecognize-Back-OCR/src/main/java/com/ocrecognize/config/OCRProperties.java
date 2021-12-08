@@ -13,4 +13,6 @@ public class OCRProperties {
     private Map<String, String> url;
     private String archiveFolder;
     private String stockEtablissement;
+    private String destinationStockEtablissement;
+    private String urlStockEtablissement;
 }

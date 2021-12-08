@@ -25,8 +25,6 @@ z
 JOCRecognize-Back-Discovery/src/main/java/com/ocrecognize/DiscoveryApp.java,2\1\2103aa98e168d1370baabbec8dca1f13f9cbdb85
 v
 FOCRecognize-Back-Gateway/src/main/java/com/ocrecognize/GatewayApp.java,7\d\7deb0117bf93ee0f4bfac3a2c366cee5d4a3ebd8
-Ž
-^OCRecognize-Back-Authentication/src/main/java/com/ocrecognize/config/MethodSecurityConfig.java,a\7\a7a52992484d611d105b01c42d58c20c8a0ca9d0
 ž
 nOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/config/AuthentificationLogoutSuccessHandler.java,e\c\ece129c20769e87813fa83cf955495b00e238fe1
 ‡
@@ -41,8 +39,6 @@ GOCRecognize-Back-OCR/src/main/java/com/ocrecognize/utils/Constants.java,e\0\e0
 fOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/controller/AuthenticationController.java,b\a\babb286c70d75bed8c4ba9d37ddf8a747d9f4ea2
 ‚
 ROCRecognize-Back-Authentication/src/main/java/com/ocrecognize/utils/Constants.java,4\9\499fae2015863434d7e67c726b18b65c56441b48
-‹
-[OCRecognize-Back-Authentication/src/main/java/com/ocrecognize/config/WebSecurityConfig.java,d\9\d95287b1633371e2b5ff53f4e17ac3f67757d56b
 ~
 NOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/dao/UserDao.java,1\3\133862114925529de252ebe4eea6e7297d77d781
 ”
@@ -55,8 +51,6 @@ eOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/config/jwt/JwtAut
 iOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/config/jwt/JwtAuthenticationEntryPoint.java,e\a\ea9e844b4cd811ac8ea0bbe799fa52413aee5fe5
 ”
 dOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/config/jwt/JwtAccessDeniedHandler.java,9\b\9bc5d157a1cd03bc9ccee2d5d92c972b2803ae4e
-Œ
-\OCRecognize-Back-Authentication/src/main/java/com/ocrecognize/config/jwt/JwtUserDetails.java,9\4\946f472cef5aaaf2ad0ba45d8625e72e844b461d
 …
 UOCRecognize-Back-Authentication/src/main/java/com/ocrecognize/utils/JwtTokenUtil.java,7\b\7b81450f84c4384bb7acde68a01e47e7cdb337ce
 z
@@ -85,8 +79,6 @@ XOCRecognize-Back-OCR/src/main/java/com/ocrecognize/model/pojo/ResponseOCRSpaceB
 POCRecognize-Back-OCR/src/main/java/com/ocrecognize/model/pojo/ParsedResults.java,0\a\0aa7a6e7906907e615bc7c06e679e86215ca8ce9
 ˆ
 XOCRecognize-Back-OCR/src/main/java/com/ocrecognize/repository/FournisseurRepository.java,d\e\deeccfb86822f8d7be9abb68615fd1919525fb97
-€
-POCRecognize-Back-OCR/src/main/java/com/ocrecognize/config/WebSecurityConfig.java,9\e\9e99a1581acdcfc33cb03d1ad82266b035488eeb
 ‚
 ROCRecognize-Back-OCR/src/main/java/com/ocrecognize/service/IOcrRequestService.java,d\8\d89c96adf345437ca60c36d03bd5ad8e0feda310
 L
@@ -103,3 +95,9 @@ ROCRecognize-Back-OCR/src/main/java/com/ocrecognize/model/pojo/FournisseurPojo.j
 VOCRecognize-Back-OCR/src/main/java/com/ocrecognize/model/entity/FournisseurEntity.java,f\1\f10f32ce76944f47b1510b87c69289ad53ef513d
 ‰
 YOCRecognize-Back-OCR/src/main/java/com/ocrecognize/config/jwt/JwtAuthorizationFilter.java,7\0\70a3c595f3c500c30a02de882a00502f41346747
+z
+JOCRecognize-Back-OCR/src/main/java/com/ocrecognize/dao/FournisseurDao.java,5\4\547b194fa730e6666e37dfa5b9859bf9b025014f
+n
+>OCRecognize-Back-OCR/src/main/java/com/ocrecognize/OcrApp.java,a\4\a441d1165d3f5985df87c266a0a8f22e176a045b
+†
+VOCRecognize-Back-OCR/src/main/java/com/ocrecognize/service/impl/OcrRequestService.java,2\5\25515d82164d7f674e9dcac5fe37f8f498cad56b

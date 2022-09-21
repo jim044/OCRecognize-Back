@@ -1,0 +1,484 @@
+databaseChangeLog:
+  - changeSet:
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) from pg_catalog.pg_namespace where nspname = 'ocr'
+      id: create-schema OCR
+      author: Jimmy
+      changes:
+        - sql:
+            comment: Ajout des droits de la BDD
+            endDelimiter: ;
+            sql: GRANT ALL PRIVILEGES ON DATABASE ocrecognize TO james
+        - sql:
+            comment: Creation du schema
+            sql: CREATE SCHEMA ocr
+        - sql:
+            comment: Grant config du schema
+            sql: GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA ocr TO james
+  - changeSet:
+      id: create-table-fournisseur
+      author: Jimmy
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: fournisseur
+              schemaName: ocr
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: fournisseur_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: siren
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nic
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: siret
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: datefin
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: datedebut
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: etatadministratifetablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: changementetatadministratifetablissement
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: enseigne1etablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: enseigne2etablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: enseigne3etablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: changementenseigneetablissement
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: denominationusuelleetablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: changementdenominationusuelleetablissement
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: activiteprincipaleetablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nomenclatureactiviteprincipaleetablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: changementactiviteprincipaleetablissement
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: caractereemployeuretablissement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: changementcaractereemployeuretablissement
+                  type: BOOLEAN
+            tableName: fournisseur
+            schemaName: ocr
+  - changeSet:
+      id: createIndex-enseigne1etablissement
+      author: Jimmy
+      changes:
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  name: enseigne1etablissement
+            indexName: fournisseur_enseigne1etablissement_idx
+            schemaName: ocr
+            tableName: fournisseur
+  - changeSet:
+      id: create-table-company
+      author: Jimmy
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: company
+              schemaName: ocr
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: company_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: siren
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: siege_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: date_creation
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: tranche_effectif_salarie
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: date_mise_a_jour
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: categorie_entreprise
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: etat_administratif
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nom_raison_sociale
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nature_juridique
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: activite_principale
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: section_activite_principale
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: economie_sociale_solidaire
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nom_complet
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nombre_etablissements
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nombre_etablissements_ouverts
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: is_entrepreneur_individuel
+                  type: BOOLEAN
+            tableName: company
+            schemaName: ocr
+  - changeSet:
+      id: create-table-dirigeant
+      author: Jimmy
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: dirigeant
+              schemaName: ocr
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: dirigeant_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nom
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: prenoms
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: annee_de_naissance
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: qualite
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: company_id
+                  type: BIGINT
+            tableName: dirigeant
+            schemaName: ocr
+  - changeSet:
+      id: create-table-siege
+      author: Jimmy
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: siege
+              schemaName: ocr
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: siege_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: siret
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: date_creation
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: tranche_effectif_salarie
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: date_debut_activite
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: etat_administratif
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: activite_principale
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: complement_adresse
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: numero_voie
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: indice_repetition
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: type_voie
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: libelle_voie
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: distribution_speciale
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: cedex
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: libelle_cedex
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: commune
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: libelle_commune
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: code_pays_etranger
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: libelle_commune_etranger
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: libelle_pays_etranger
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: adresse_complete
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: adresse_complete_secondaire
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: code_postal
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: departement
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: geo_id
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: longitude
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: latitude
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: activite_principale_registre_metier
+                  type: VARCHAR(250)
+            tableName: siege
+            schemaName: ocr
+  - changeSet:
+      id: create-foreign-key-company-siege
+      author: Jimmy
+      changes:
+      - addForeignKeyConstraint:
+          baseColumnNames: siege_id
+          baseTableName: company
+          baseTableSchemaName: ocr
+          constraintName: fk_company_siege
+          deferrable: true
+          initiallyDeferred: true
+          onDelete: CASCADE
+          onUpdate: RESTRICT
+          referencedColumnNames: id
+          referencedTableName: siege
+          referencedTableSchemaName: ocr
+          validate: true
+  - changeSet:
+      id: create-foreign-key-dirigeant-company
+      author: Jimmy
+      changes:
+      - addForeignKeyConstraint:
+          baseColumnNames: company_id
+          baseTableName: dirigeant
+          baseTableSchemaName: ocr
+          constraintName: fk_dirigeant_company
+          deferrable: true
+          initiallyDeferred: true
+          onDelete: CASCADE
+          onUpdate: RESTRICT
+          referencedColumnNames: id
+          referencedTableName: company
+          referencedTableSchemaName: ocr
+          validate: true

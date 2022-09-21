@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+zuul:
+  host:
+    socket-timeout.millis: 150000
+    connect-timeout.millis: 300000
+  routes:
+    authentication-service:
+      path: /ms-authentication/**
+      sensitiveHeaders:
+      serviceId: authentication-service
+    ocr-service:
+      path: /ms-ocr/**
+      sensitiveHeaders:
+      serviceId: ocr-service
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+ribbon:
+    MaxAutoRetries: 10
+    ConnectTimeout: 300000
+    ReadTimeout: 300000
+
+# Increase the Hystrix timeout to 60s (globally)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 300000
+
+
+
+

@@ -1,0 +1,118 @@
+databaseChangeLog:
+  - changeSet:
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) from pg_catalog.pg_namespace where nspname = 'authentication'
+      id: create-schema Authentication
+      author: Jimmy
+      changes:
+        - sql:
+            comment: Ajout des droits de la BDD
+            endDelimiter: ;
+            sql: GRANT ALL PRIVILEGES ON DATABASE ocrecognize TO james
+        - sql:
+            comment: Creation du schema
+            sql: CREATE SCHEMA authentication
+        - sql:
+            comment: Grant config du schema
+            sql: GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA authentication TO james
+  - changeSet:
+      id: create-table-user
+      author: Jimmy
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: user
+              schemaName: authentication
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: user_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: username
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: password
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: firstname
+                  type: VARCHAR(250)
+              - column:
+                  name: lastname
+                  type: VARCHAR(250)
+              - column:
+                  name: role_id
+                  type: BIGINT
+            tableName: user
+            schemaName: authentication
+  - changeSet:
+      id: create-table-role
+      author: Jimmy
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: role
+              schemaName: authentication
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: role_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: role_name
+                  type: VARCHAR(250)
+            tableName: role
+            schemaName: authentication
+  - changeSet:
+      id: addForeignKeyConstraint-role_id
+      author: Jimmy
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: user
+            baseTableSchemaName: authentication
+            constraintName: fk_role_user
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: role
+            referencedTableSchemaName: authentication
+            validate: true
+  - changeSet:
+      id: insert user and role
+      author: Jimmy
+      changes:
+        sqlFile:
+          dbms: 'postgresql'
+          endDelimiter: \nGO
+          splitStatements: true
+          path: ./init_insert_user_role.sql
+          stripComments: true
+          relativeToChangelogFile: true

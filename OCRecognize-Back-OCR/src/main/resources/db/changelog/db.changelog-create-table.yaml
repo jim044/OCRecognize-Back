@@ -155,16 +155,10 @@ databaseChangeLog:
         - createTable:
             columns:
               - column:
-                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: company_pkey
-                  name: id
-                  type: BIGINT
-              - column:
-                  constraints:
-                    nullable: false
                   name: siren
                   type: VARCHAR(250)
               - column:
@@ -174,72 +168,72 @@ databaseChangeLog:
                   type: BIGINT
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: date_creation
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: tranche_effectif_salarie
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: date_mise_a_jour
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: categorie_entreprise
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: etat_administratif
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: nom_raison_sociale
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: nature_juridique
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: activite_principale
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: section_activite_principale
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: economie_sociale_solidaire
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: nom_complet
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: nombre_etablissements
                   type: INTEGER
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: nombre_etablissements_ouverts
                   type: INTEGER
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: is_entrepreneur_individuel
                   type: BOOLEAN
             tableName: company
@@ -266,29 +260,29 @@ databaseChangeLog:
                   type: BIGINT
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: nom
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: prenoms
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: annee_de_naissance
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: qualite
                   type: VARCHAR(250)
               - column:
                   constraints:
                     nullable: false
-                  name: company_id
-                  type: BIGINT
+                  name: company_siren
+                  type: VARCHAR(250)
             tableName: dirigeant
             schemaName: ocr
   - changeSet:
@@ -318,132 +312,132 @@ databaseChangeLog:
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: date_creation
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: tranche_effectif_salarie
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: date_debut_activite
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: etat_administratif
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: activite_principale
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: complement_adresse
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: numero_voie
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: indice_repetition
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: type_voie
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: libelle_voie
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: distribution_speciale
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: cedex
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: libelle_cedex
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: commune
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: libelle_commune
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: code_pays_etranger
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: libelle_commune_etranger
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: libelle_pays_etranger
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: adresse_complete
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: adresse_complete_secondaire
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: code_postal
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: departement
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: geo_id
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: longitude
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: latitude
                   type: VARCHAR(250)
               - column:
                   constraints:
-                    nullable: false
+                    nullable: true
                   name: activite_principale_registre_metier
                   type: VARCHAR(250)
             tableName: siege
@@ -470,7 +464,7 @@ databaseChangeLog:
       author: Jimmy
       changes:
       - addForeignKeyConstraint:
-          baseColumnNames: company_id
+          baseColumnNames: company_siren
           baseTableName: dirigeant
           baseTableSchemaName: ocr
           constraintName: fk_dirigeant_company
@@ -478,7 +472,7 @@ databaseChangeLog:
           initiallyDeferred: true
           onDelete: CASCADE
           onUpdate: RESTRICT
-          referencedColumnNames: id
+          referencedColumnNames: siren
           referencedTableName: company
           referencedTableSchemaName: ocr
           validate: true

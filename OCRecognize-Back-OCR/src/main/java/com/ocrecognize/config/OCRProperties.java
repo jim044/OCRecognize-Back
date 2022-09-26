@@ -16,4 +16,5 @@ public class OCRProperties {
     private String destinationStockEtablissement;
     private String fileStockEtablissement;
     private String urlStockEtablissement;
+    private String urlApiStockEtablissement;
 }

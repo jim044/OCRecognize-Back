@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "DIRIGEANT")
 @Data
-public class DirigeantsEntity {
+public class DirigeantEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class DirigeantsEntity {
     @Column(name = "qualite")
     private String qualite;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_siren", referencedColumnName = "siren")
     private CompanyEntity company;
 }

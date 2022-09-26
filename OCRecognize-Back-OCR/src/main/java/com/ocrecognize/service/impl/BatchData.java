@@ -1,11 +1,11 @@
 package com.ocrecognize.service.impl;
 
 import com.ocrecognize.config.OCRProperties;
+import com.ocrecognize.dao.CompanyDao;
 import com.ocrecognize.dao.FournisseurDao;
 import com.ocrecognize.mapper.FournisseurMapper;
-import com.ocrecognize.model.dto.CompanyDto;
+import com.ocrecognize.model.dto.ResultDto;
 import com.ocrecognize.model.dto.FournisseurDto;
-import com.ocrecognize.model.pojo.ResponseOCRSpaceByUrl;
 import com.ocrecognize.service.IBatchData;
 import com.ocrecognize.utils.DownloadUtils;
 import com.ocrecognize.utils.ZipUtils;
@@ -32,17 +32,20 @@ import java.util.List;
 public class BatchData implements IBatchData {
 
     @Autowired
+    private OCRProperties ocrProperties;
+
+    @Autowired
     private FournisseurMapper fournisseurMapper;
 
     @Autowired
     private FournisseurDao fournisseurDao;
 
     @Autowired
-    private OCRProperties ocrProperties;
-
-    @Autowired
     @Qualifier("ClientAuthentificationRestemplate")
     private RestTemplate restTemplate;
+
+    @Autowired
+    private CompanyDao companyDao;
 
     @Override
     //@Scheduled(cron = "15 * * * * ?")
@@ -72,11 +75,14 @@ public class BatchData implements IBatchData {
         }
     }
 
-    @Scheduled(cron = "*/30 * * * * ?")
+    @Scheduled(cron = "0 29/30 * * * ?")
     private void searchCompany(){
 
-        CompanyDto companyDtoResult = restTemplate.getForObject("https://recherche-entreprises.api.gouv.fr/search?q=RBC&page=1&per_page=2", CompanyDto.class);
-
+        String letters = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        for (char ch: letters.toCharArray()) {
+            ResultDto resultDto = restTemplate.getForObject(ocrProperties.getUrlApiStockEtablissement() + "q=" + ch + "&page=1&per_page=10000", ResultDto.class);
+            companyDao.saveAllAndUpdateCompany(resultDto.getResults());
+        }
     }
 
     public void authenticationBatch(){

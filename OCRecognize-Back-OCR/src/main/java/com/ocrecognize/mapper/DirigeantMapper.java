@@ -1,19 +1,22 @@
 package com.ocrecognize.mapper;
 
-import com.ocrecognize.model.dto.DirigeantsDto;
-import com.ocrecognize.model.entity.DirigeantsEntity;
+import com.ocrecognize.model.dto.DirigeantDto;
+import com.ocrecognize.model.entity.DirigeantEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {CompanyMapper.class}, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface DirigeantMapper {
 
-    DirigeantsDto dirigeantsEntityToDirigeantDto(DirigeantsEntity dirigeantsEntity);
+    @Mapping(target = "company.dirigeants", ignore = true)
+    DirigeantDto dirigeantsEntityToDirigeantDto(DirigeantEntity dirigeantsEntity);
 
-    DirigeantsEntity dirigeantsDtoToDirigeantEntity(DirigeantsDto dirigeantsDto);
+    @Mapping(target = "company.dirigeants", ignore = true)
+    DirigeantEntity dirigeantsDtoToDirigeantEntity(DirigeantDto dirigeantsDto);
 
-    List<DirigeantsDto> dirigeantsEntitesToDirigeantsDtos(List<DirigeantsEntity> dirigeantsEntities);
+    List<DirigeantDto> dirigeantsEntitesToDirigeantsDtos(List<DirigeantEntity> dirigeantsEntities);
 
-    List<DirigeantsEntity> dirigeantsDtosToDirigeantsEntities(List<DirigeantsDto> dirigeantsDtos);
+    List<DirigeantEntity> dirigeantsDtosToDirigeantsEntities(List<DirigeantDto> dirigeantsDtos);
 }

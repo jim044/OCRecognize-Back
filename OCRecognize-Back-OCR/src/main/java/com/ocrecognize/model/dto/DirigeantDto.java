@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class DirigeantsDto {
+public class DirigeantDto {
 
     @JsonProperty(value="nom")
     private String nom;
@@ -17,4 +17,7 @@ public class DirigeantsDto {
 
     @JsonProperty(value="qualite")
     private String qualite;
+
+    private CompanyDto company;
+
 }

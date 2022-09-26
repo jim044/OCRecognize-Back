@@ -10,10 +10,6 @@ import java.util.List;
 public class CompanyEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
     @Column(name = "siren")
     private String siren;
 
@@ -63,6 +59,6 @@ public class CompanyEntity {
     @Column(name = "is_entrepreneur_individuel")
     private Boolean is_entrepreneur_individuel;
 
-    @OneToMany(mappedBy="company")
-    private List<DirigeantsEntity> dirigeants;
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval=true)
+    private List<DirigeantEntity> dirigeants;
 }

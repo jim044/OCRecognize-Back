@@ -3,10 +3,7 @@ package com.ocrecognize.controller;
 import com.ocrecognize.service.IOcrRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/ocrrecognize")

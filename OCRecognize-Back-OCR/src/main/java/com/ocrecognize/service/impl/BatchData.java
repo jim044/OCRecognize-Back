@@ -75,10 +75,10 @@ public class BatchData implements IBatchData {
         }
     }
 
-    @Scheduled(cron = "0 29/30 * * * ?")
+    //@Scheduled(cron = "0 0/30 * * * ?")
     private void searchCompany(){
 
-        String letters = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String letters = "abcdefghijklmnopqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (char ch: letters.toCharArray()) {
             ResultDto resultDto = restTemplate.getForObject(ocrProperties.getUrlApiStockEtablissement() + "q=" + ch + "&page=1&per_page=10000", ResultDto.class);
             companyDao.saveAllAndUpdateCompany(resultDto.getResults());

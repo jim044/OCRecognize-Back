@@ -1,15 +1,15 @@
 package com.ocrecognize.service.impl;
 
 import com.ocrecognize.config.OCRProperties;
+import com.ocrecognize.dao.CompanyDao;
 import com.ocrecognize.dao.FournisseurDao;
-import com.ocrecognize.model.dto.FournisseurDto;
+import com.ocrecognize.model.dto.CompanyDto;
 import com.ocrecognize.model.pojo.ResponseOCRSpaceByUrl;
 import com.ocrecognize.service.IBatchData;
 import com.ocrecognize.service.IOcrRequestService;
 import com.ocrecognize.utils.DateUtils;
 import com.ocrecognize.utils.DownloadUtils;
 import com.ocrecognize.utils.UtilsString;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -19,11 +19,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @Service
 public class OcrRequestService implements IOcrRequestService {
@@ -41,6 +39,9 @@ public class OcrRequestService implements IOcrRequestService {
     @Autowired
     private IBatchData batchData;
 
+    @Autowired
+    private CompanyDao companyDao;
+
     @Override
     public Boolean archiveDocumentByFile(String file) {
         String getAllTextByFileAndByOCRApiCompanyByGetRequest = getAllTextByFileAndByOCRApiCompanyByGetRequest(file, "ocr-space");
@@ -49,16 +50,15 @@ public class OcrRequestService implements IOcrRequestService {
 
     @Override
     public Boolean archiveDocumentByUrl(String url, String ocrAPICompany) {
-        batchData.insertNewDataForFournisseur();
         String getAllTextByUrlAndByOCRApiCompanyByGetRequest = getAllTextByUrlAndByOCRApiCompanyByGetRequest(url, "ocr-space");
         
         if(getAllTextByUrlAndByOCRApiCompanyByGetRequest != null){
             String presumeFournisseurName = getFournisseurNameByOCRString(getAllTextByUrlAndByOCRApiCompanyByGetRequest);
-            //if(presumeFournisseurName != null){
-                presumeFournisseurName = UtilsString.formatStringWithoutSpecialChar(presumeFournisseurName).replaceAll(" ", "");
+            presumeFournisseurName = presumeFournisseurName.substring(0, 1).toUpperCase() + presumeFournisseurName.substring(1);
+            if(presumeFournisseurName != null){
                 String folderUri = createFolderByFournisseurName(presumeFournisseurName);
                 DownloadUtils.downloadFileByURL(url, folderUri + "\\" + presumeFournisseurName + " " + DateUtils.formatLocalDateTime(LocalDateTime.now()) + ".jpg");
-           // }
+            }
         }
 
         return true;
@@ -88,22 +88,40 @@ public class OcrRequestService implements IOcrRequestService {
         textOcr = UtilsString.formatStringWithoutSpecialChar(textOcr);
         String[] splitedString = UtilsString.splitStringByTab(textOcr);
         String presumeFournisseurName = null;
-        Map<String, Integer> mapMostOccurence = new HashMap<>();
-        Map<String, Integer> mapMostOccurenceByUpperCase = new HashMap<>();
-        Map<String, Boolean> mapPresentInBoth = new HashMap<>();
+        final String[] companyReturn = {null};
+        final Integer[] firstIndex = {0};
 
-        List<FournisseurDto> fournisseurDtoList = fournisseurDao.getFournisseurByFournisseurName(splitedString[0].toUpperCase());
-        if(!fournisseurDtoList.isEmpty()){
-            presumeFournisseurName = splitedString[0].toUpperCase();
-        }else{
-            mapMostOccurence = UtilsString.mostOccurenceInCollection(splitedString, textOcr);
-            mapMostOccurenceByUpperCase = UtilsString.mostOccurenceUpperCaseInCollection(splitedString, textOcr);
-            mapPresentInBoth = UtilsString.areEqualKeyValues(mapMostOccurence, mapMostOccurenceByUpperCase);
-        }
+        List<String> splitedStringList = Arrays.stream(splitedString)
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
 
-        if(fournisseurDtoList.isEmpty() && presumeFournisseurName != null){
-            fournisseurDtoList = fournisseurDao.getFournisseurByFournisseurName(presumeFournisseurName.toUpperCase());
-            presumeFournisseurName = !fournisseurDtoList.isEmpty() ? presumeFournisseurName.toUpperCase() : null;
+        List<CompanyDto> companyDtoList = companyDao.findCompanyBySplitText(splitedStringList);
+        Collections.reverse(companyDtoList);
+        /*if(companyDtoList.size() > 0 && companyDtoList.size() <= 2){
+            presumeFournisseurName = companyDtoList
+                    .stream()
+                    .map(c -> c.getNom_raison_sociale())
+                    .collect(Collectors.joining(
+                            " "));
+        }else */if(companyDtoList.size() > 0){
+            companyDtoList.stream()
+                    .map(companyDto -> companyDto.getNom_complet())
+                    .collect(Collectors.toList())
+                            .forEach(companyEtab -> {
+                                Integer indexList = splitedStringList.indexOf(companyEtab);
+                                if(indexList == 0){
+                                    firstIndex[0] = indexList;
+                                    companyReturn[0] = companyEtab;
+                                }else if(indexList > 0 && firstIndex[0] == 0){
+                                    firstIndex[0] = indexList;
+                                    companyReturn[0] = companyEtab;
+                                }else if(indexList > 0 && firstIndex[0] > 0 && indexList < firstIndex[0]){
+                                    firstIndex[0] = indexList;
+                                    companyReturn[0] = companyEtab;
+                                }
+
+                            });
+            presumeFournisseurName = companyReturn[0];
         }
 
         return presumeFournisseurName;

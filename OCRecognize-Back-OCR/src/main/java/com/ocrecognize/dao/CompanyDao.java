@@ -30,4 +30,8 @@ public class CompanyDao {
         });
         return companyMapper.companysEntitesToCompanysDtos(companyRepository.saveAll(companyMapper.companysDtosToCompanysEntities(companyDtoList)));
     }
+
+    public List<CompanyDto> findCompanyBySplitText(List<String> splitedString) {
+        return companyMapper.companysEntitesToCompanysDtos(companyRepository.findCompanyBySplitText(splitedString));
+    }
 }

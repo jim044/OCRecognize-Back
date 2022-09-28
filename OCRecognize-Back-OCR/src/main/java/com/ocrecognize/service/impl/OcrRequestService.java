@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class OcrRequestService implements IOcrRequestService {
@@ -77,7 +78,7 @@ public class OcrRequestService implements IOcrRequestService {
 
     private String getResultResponseByOCRApiCompany(ResponseOCRSpaceByUrl resultResponse){
         String returnResultResponse = null;
-        if(resultResponse != null && !resultResponse.getParsedResults().isEmpty()){
+        if(resultResponse != null && resultResponse.getParsedResults() != null && !resultResponse.getParsedResults().isEmpty()){
             returnResultResponse = resultResponse.getParsedResults().get(0).getParsedText();
         }
 
@@ -95,27 +96,31 @@ public class OcrRequestService implements IOcrRequestService {
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
 
+/*        String companyContenateString = splitedStringList
+                .stream()
+                .map(company -> "'" + company + "%'")
+                .collect(Collectors.joining(" OR nom_complet LIKE "));*/
+
+/*        List<CompanyDto> listCompanyDtoCheckByString = new ArrayList<>();
+        splitedStringList.forEach(companyString -> {
+            Stream.concat(listCompanyDtoCheckByString.stream(), companyDao.findCompanyByText(companyString).stream());
+        });*/
+
         List<CompanyDto> companyDtoList = companyDao.findCompanyBySplitText(splitedStringList);
         Collections.reverse(companyDtoList);
-        /*if(companyDtoList.size() > 0 && companyDtoList.size() <= 2){
-            presumeFournisseurName = companyDtoList
-                    .stream()
-                    .map(c -> c.getNom_raison_sociale())
-                    .collect(Collectors.joining(
-                            " "));
-        }else */if(companyDtoList.size() > 0){
+        if(companyDtoList.size() > 0){
             companyDtoList.stream()
                     .map(companyDto -> companyDto.getNom_complet())
                     .collect(Collectors.toList())
                             .forEach(companyEtab -> {
                                 Integer indexList = splitedStringList.indexOf(companyEtab);
-                                if(indexList == 0){
+                                if(companyReturn[0] == null){
                                     firstIndex[0] = indexList;
                                     companyReturn[0] = companyEtab;
-                                }else if(indexList > 0 && firstIndex[0] == 0){
+                                }else if(indexList > 0 && firstIndex[0] == 0 && companyReturn[0] != null){
                                     firstIndex[0] = indexList;
                                     companyReturn[0] = companyEtab;
-                                }else if(indexList > 0 && firstIndex[0] > 0 && indexList < firstIndex[0]){
+                                }else if(indexList > 0 && firstIndex[0] > 0 && indexList < firstIndex[0] && companyReturn[0] != null){
                                     firstIndex[0] = indexList;
                                     companyReturn[0] = companyEtab;
                                 }

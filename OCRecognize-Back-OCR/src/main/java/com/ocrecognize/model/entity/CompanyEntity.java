@@ -48,7 +48,7 @@ public class CompanyEntity {
     private String economie_sociale_solidaire;
 
     @Column(name = "nom_complet")
-    private String nom_complet;
+    private String nomComplet;
 
     @Column(name = "nombre_etablissements")
     private Integer nombre_etablissements;

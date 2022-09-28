@@ -55,7 +55,7 @@ public class BatchData implements IBatchData {
     }
 
     @Override
-    //@Scheduled(cron = "* */60 * * * ?")
+    //@Scheduled(cron = "* 59/30 * * * ?")
     public void insertNewDataForFournisseur() {
         FournisseurDto fournisseurDto = new FournisseurDto();
         try(CSVReader reader = new CSVReader(new FileReader(ResourceUtils.getFile(ocrProperties.getStockEtablissement())), ',', '\'', 1))
@@ -75,13 +75,19 @@ public class BatchData implements IBatchData {
         }
     }
 
-    //@Scheduled(cron = "0 0/30 * * * ?")
+    //@Scheduled(cron = "0 08/30 * * * ?")
     private void searchCompany(){
 
         String letters = "abcdefghijklmnopqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (char ch: letters.toCharArray()) {
             ResultDto resultDto = restTemplate.getForObject(ocrProperties.getUrlApiStockEtablissement() + "q=" + ch + "&page=1&per_page=10000", ResultDto.class);
             companyDao.saveAllAndUpdateCompany(resultDto.getResults());
+            for (char cha: letters.toCharArray()) {
+                if(ch != cha){
+                    resultDto = restTemplate.getForObject(ocrProperties.getUrlApiStockEtablissement() + "q=" + ch + cha + "&page=1&per_page=10000", ResultDto.class);
+                    companyDao.saveAllAndUpdateCompany(resultDto.getResults());
+                }
+            }
         }
     }
 

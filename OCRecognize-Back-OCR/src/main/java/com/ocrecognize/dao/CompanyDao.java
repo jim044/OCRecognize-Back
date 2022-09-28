@@ -7,6 +7,8 @@ import com.ocrecognize.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
@@ -17,6 +19,9 @@ public class CompanyDao {
 
     @Autowired
     private CompanyRepository companyRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public CompanyDto saveAndUpdateCompany(CompanyDto companyDto) {
         return companyMapper.companyEntityToCompanyDto(companyRepository.save(companyMapper.companyDtoToCompanyEntity(companyDto)));
@@ -32,6 +37,11 @@ public class CompanyDao {
     }
 
     public List<CompanyDto> findCompanyBySplitText(List<String> splitedString) {
+        //return companyMapper.companysEntitesToCompanysDtos(entityManager.createQuery("SELECT c FROM CompanyEntity c WHERE nom_complet LIKE " + splitedString + " AND LENGTH(c.nom_complet) > 2").getResultList());
         return companyMapper.companysEntitesToCompanysDtos(companyRepository.findCompanyBySplitText(splitedString));
+    }
+
+    public List<CompanyDto> findCompanyByText(String companyString) {
+        return companyMapper.companysEntitesToCompanysDtos(companyRepository.findByNomCompletContaining(companyString));
     }
 }

@@ -75,7 +75,7 @@ public class BatchData implements IBatchData {
         }
     }
 
-    //@Scheduled(cron = "0 08/30 * * * ?")
+    @Scheduled(cron = "0 15/250 * * * ?")
     private void searchCompany(){
 
         String letters = "abcdefghijklmnopqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
